@@ -1,0 +1,12 @@
+GL_POINTS 绘制一个或多个顶点
+GL_LINES 绘制线段
+GL_LINE_STRIP 绘制连续线段
+GL_LINE_LOOP 绘制闭合的线段
+GL_POLYGON 绘制多边形
+GL_TRIANGLES 绘制一个或多个三角形
+GL_TRIANGLE_STRIP 绘制连续三角形
+GL_TRIANGLE_FAN 绘制多个三角形组成的扇形
+GL_QUADS 绘制一个或多个四边形
+GL_QUAD_STRIP 绘制连续四边形
+
+核心库(gl)、实用库(glu)、实用工具库(glut)、辅助库(aux)、窗口库(glx、agl、wgl)
