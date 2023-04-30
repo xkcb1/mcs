@@ -62,14 +62,8 @@ class NewProjectWindow(MyWindow):#继承Qwidget
         self._BottomUI_()
         #use newProject.qss theme
         self.setFocusPolicy(QtCore.Qt.ClickFocus)
-    def focusInEvent(self, a0: QtGui.QFocusEvent):
-        # super().focusInEvent(a0)
-        self.label_2.setStyleSheet('color:#eee !important;')
-    def focusOutEvent(self, a0: QtGui.QFocusEvent):
-        self.label_2.setStyleSheet('color:#aaa !important;')
-        pass
     def UseTheme(self):
-        styleFile = './style/newProject.qss'
+        styleFile = './style/newProject_light.qss'
         qssStyle = StyleReader.readQSS(styleFile)
         self.setStyleSheet(qssStyle)
     #end

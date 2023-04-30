@@ -60,6 +60,9 @@ class MyWindow(QWidget, Ui_Form):
         if self.isMaximized():  # 缩小
             self.THIS_Widget.setContentsMargins(7, 7, 7, 7)
             self.verticalLayout__.setContentsMargins(1, 1, 1, 1)
+            self.THIS_Widget.setStyleSheet('''
+            border-radius: 7px !important;
+            ''')
             self.showNormal()  # 切换放大按钮图标
             self.pushButton_2.setToolTip(
                 "<html><head/><body><p>最大化</p></body></html>")
@@ -67,6 +70,9 @@ class MyWindow(QWidget, Ui_Form):
             self.THIS_Widget.setContentsMargins(0, 0, 0, 0)
             self.verticalLayout__.setContentsMargins(0, 0, 0, 0)
             self.showMaximized()
+            self.THIS_Widget.setStyleSheet('''
+                        border-radius: 0px !important;
+                        ''')
             self.pushButton_2.setToolTip(
                 "<html><head/><body><p>恢复</p></body></html>")
 

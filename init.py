@@ -10,6 +10,14 @@ from Main import NewEditor
 from lib.ProjectType import ProjectType,ProjectTypeTab
 #定义APP_LOG
 from lib.base import *
+#setting
+'''QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+QGuiApplication.setAttribute(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)'''
+QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
+QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+#QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
 clearLog()
 print('Already running the application in Python '+sys.version)
 settings = {'IfUseMorePackage':False,
@@ -44,7 +52,6 @@ if getconfig == 'new':
 elif settings == getconfig:
     OpenNewProjectWindow()
 else:
-    QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QApplication(sys.argv)
     editor = NewEditor()
     #apply_stylesheet(app, theme='dark_amber.xml')

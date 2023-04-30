@@ -80,3 +80,4 @@ def OpenNbtFile():
     print('openNbtfile:',filepath)
     SELF.makeTreethread = NbtTrewwThread(filepath[0],treeView)
     SELF.makeTreethread.start()
+    #MakeHexEditorStart()

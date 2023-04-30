@@ -1,5 +1,6 @@
 import os,sys
 import PyQt5.QtGui as QtGui
+import vtk
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -12,11 +13,7 @@ import lib.WindowMenu
 import lib.core.function.FileIcon
 from lib.core.function.FileIcon import *
 #3d
-from lib.pure.nbtToStl import *
-from OpenGL.GL import *
-from OpenGL.arrays import vbo
-from OpenGL.GLU import *
-from OpenGL.GLUT import *
+from lib.pure.NbtTree import *
 #math
 import numpy as np
 import math
@@ -26,6 +23,11 @@ import numpy
 import traceback
 #nbt
 import nbtlib
+#use vtk
+from PyQt5.QtOpenGL import QGLWidget
+from vtk import *
+from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
+from lib.pure.MakeObj import MakeStlFileByNbt
 #方便一次性导入所有的基础要用的库
 ################################################################
 rewrite_print = print
@@ -507,15 +509,18 @@ class AssetWidget(FlowWidget):
         self.FileList = []
         self.DirList = []
         self.AllList = []
+        self.fileCount = []
+        self.DirCount = []
         self.bottom = bottom
         self.setRootPath(self.path)
     def setRootPath(self,path):
         #更换目录用的
         self.path = path
         get_file_path(self.path,self.FileList,self.DirList)
+        get_ALL_file_count(self.path,self.fileCount,self.DirCount)
         self.AllList = self.FileList + self.DirList
         #rewrite_print(self.FileList,self.DirList,self.AllList)
-        self.bottom.setText(f'文件夹数:{str(len(self.DirList))} | 文件数:{str(len(self.FileList))}')
+        self.bottom.setText(f'文件夹数:{str(len(self.fileCount))} | 文件数:{str(len(self.DirCount))}')
         self.update()#读取目录并更换完后，进行重新绘制
         
     def update(self):
@@ -557,9 +562,22 @@ def get_file_path(root_path,file_list,dir_list):
         if os.path.isdir(dir_file_path):
             dir_list.append(dir_file_path)
             #递归获取所有文件和目录的路径
-            get_file_path(dir_file_path,file_list,dir_list)
+            #get_file_path(dir_file_path,file_list,dir_list)
         else:
             file_list.append(dir_file_path)
+def get_ALL_file_count(root_path,file_list_count,dir_list_count):
+    #获取该目录下所有的文件名称和目录名称
+    dir_or_files = os.listdir(root_path)
+    for dir_file in dir_or_files:
+        #获取目录或者文件的路径
+        dir_file_path = os.path.join(root_path,dir_file)
+        #判断该路径为文件还是路径
+        if os.path.isdir(dir_file_path):
+            dir_list_count.append(dir_file_path)
+            #递归获取所有文件和目录的路径
+            get_ALL_file_count(dir_file_path,file_list_count,dir_list_count)
+        else:
+            file_list_count.append(dir_file_path)
 ################################################################
 class PpathWidget(QScrollArea):
     def __init__(self,path):
@@ -584,9 +602,11 @@ class PpathWidget(QScrollArea):
         #rewrite_print(path)
         for Item in self.path.split('/'):
             ThisButton = QPushButton()
-            ThisButton.setMaximumWidth(len(Item)*7 + 23 + 7)
             ThisButton.setObjectName('PpathWidgetButton')
             ThisButton.setIcon(QIcon('./img/icons/folder.svg'))
             ThisButton.setText(Item + ' >')
             self.ThisLayout.addWidget(ThisButton)
         self.ThisLayout.addWidget(QWidget())
+        self.ThisLayout.addStretch(999)
+########################################################################
+

@@ -110,4 +110,3 @@ def MakeTree(parent,parentWidget,name=''):
             MakeTree(item,tagParent)
         if len(parent) == 0:
             tagParent.setText(1,'[ ]')
-    
