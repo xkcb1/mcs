@@ -8,13 +8,12 @@ from PyQt5.QtGui import QGuiApplication
 from lib.StyleReader import StyleReader
 import getpass
 from Main import NewEditor
-from lib.newWindow import *
 from lib.readConfig import makeProject
 #import base functions
 from lib.base import *
 #end
 #import
-class NewProjectWindow(MyWindow):#继承Qwidget
+class NewProjectWindow(QMainWindow):#继承Qwidget
     def __init__(self):
         #init <- super
         super().__init__()
@@ -36,7 +35,7 @@ class NewProjectWindow(MyWindow):#继承Qwidget
         self.User = getpass.getuser()
         #self.setGeometry(300, 300, 250, 150)
         # #(x, y, w, h)       
-        self.label_2.setText('新建项目 (new project) - '+self.User)#bg
+        self.setWindowTitle('新建项目 (new project) - '+self.User)#bg
         self.MainWidget = QWidget(self.widget_2)
         self.MainWidget.move(0,0)
         self.MainWidget.resize(self.W - 16 - 14,self.H - 46)

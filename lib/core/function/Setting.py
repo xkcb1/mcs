@@ -6,22 +6,20 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import getpass
 from lib.StyleReader import StyleReader
-from lib.newWindow import *
 from lib.fileTreeView import CreateFileTree
 from lib.readConfig import readConfig
 import lib.WindowMenu as WindowMenu
-from lib.newWindow import MyWindow
 #import base functions
 from lib.core.ui.newPanelWindow import *
 from lib.base import *
 from lib.core.function.theme import *
 #end
-class SettingWindow(PanelWindow):
+class SettingWindow(QMainWindow):
     def __init__(self,parent,User):
         super().__init__()
         self.parent = parent
         self.User = User
-        self.label_2.setText('setting - User')
+        self.setWindowTitle('setting - User')
         globals()['SELF'] = self
         self.lb = QVBoxLayout()
         scroll = QScrollArea()

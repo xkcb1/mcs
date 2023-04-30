@@ -18,7 +18,12 @@ ChoicePanelCount = 0
 This_Self = None
 LastSender = None
 ThisMainPanel = None
+SELF = None
+ChoicePanel_Style = {}
 def OutTheChoicePanel(sender:QPushButton,self,WindowPos) -> None:
+    global SELF,ChoicePanel_Style
+    SELF = self
+    ChoicePanel_Style = "{background-color: "+SELF.Theme['bg']+";border: 1px solid #ccc;"
     globals()['SELF'] = self
     global ChoicePanelCount,ChoicePanelDict,This_Self,LastSender,ThisMainPanel
     if sender == LastSender:
@@ -86,7 +91,7 @@ def OutTheChoicePanel(sender:QPushButton,self,WindowPos) -> None:
         self.findChild(QWidget,i).deleteLater()
         ChoicePanelDict = {}
     #清除一遍
-    ChoicePanel = QWidget(self)
+    ChoicePanel = QFrame(self)
     ThisMainPanel = ChoicePanel
     #向全局赋值
     ChoicePanel.resize(ChoicePanel_Width,ChoicePanel_Height)
@@ -284,7 +289,6 @@ def DrawChoicePanel(Widget:QWidget,marginA,marginB,Name,ThisPanel,sender:QPushBu
     ChoiceLayout.addLayout(Layout_3)
     Widget.setLayout(ChoiceLayout)
     pass
-ChoicePanel_Style = "{background-color: #ededed;border: 1px solid #ccc;"
 def cleanGraph():
     This_Self.effect_shadow.setBlurRadius(0)  # 阴影半径
     #This_Self.effect_shadow_Sender.setBlurRadius(0) #sender

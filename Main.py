@@ -8,7 +8,6 @@ import getpass
 import time
 #import core
 from lib.StyleReader import StyleReader
-from lib.newWindow import *
 from lib.fileTreeView import CreateFileTree
 from lib.readConfig import readConfig
 import lib.WindowMenu as WindowMenuThis
@@ -68,7 +67,7 @@ class PFrame(QFrame):
         ChoicePanel.CheckRemoveThePanel(PointPos)
         #print(evt.x(),evt.y(),dir(self))
        
-class NewEditor(MyWindow):
+class NewEditor(QMainWindow):
     def __init__(self):
         global Window_self
         super().__init__()
@@ -76,6 +75,7 @@ class NewEditor(MyWindow):
         globals()['SELF'] = self
         self.EditorList = []
         self.Editorindex = 0
+        self.Theme = {'bg':'#ededed'}
         self.index = 0
         self.panelWindowCount = 0
         self.SettingWindowCount = 0
@@ -93,7 +93,6 @@ class NewEditor(MyWindow):
         self.Projectfolders = 0
         self.Projectfiles = 0
         self.UseTheme()
-        self.setFocusPolicy(QtCore.Qt.ClickFocus)
     def CreatChildWindow(self,parent:QWidget,mode,spliterList:list,Old_widget_splitter_to:str,layoutThis=None):#在这里创建了子面板
         if Old_widget_splitter_to == '1':
             #to <1> widget
@@ -113,15 +112,15 @@ class NewEditor(MyWindow):
         elif mode == Qt.Horizontal:
             NewSpliter = QSplitter(Qt.Horizontal)
         NewSpliter.setObjectName("SPLITTERS")
-        NewSpliter.setHandleWidth(2)
+        NewSpliter.setHandleWidth(3)
         #QFRAME分隔
         Qweiget_1 = PFrame()
         Qweiget_1.setObjectName('PURE_WIDGET_SPLITTER_'+str(self.ChildWindowCount))
-        Qweiget_1.setStyleSheet('QFrame{background-color:#f9f9f9;border:1px solid #ddd;margin:0px;border-radius:3px;}')
+        Qweiget_1.setStyleSheet('QFrame{border:1px solid #aaa;margin:0px;border-radius:3px;}')
         self.ChildWindowCount = self.ChildWindowCount + 1
         Qweiget_2 = PFrame()
         Qweiget_2.setObjectName('PURE_WIDGET_SPLITTER_'+str(self.ChildWindowCount))
-        Qweiget_2.setStyleSheet('QFrame{background-color:#f9f9f9;border:1px solid #ddd;margin:0px;border-radius:3px;}')
+        Qweiget_2.setStyleSheet('QFrame{border:1px solid #aaa;margin:0px;border-radius:3px;}')
         #命名
         self.ChildWindowCount = self.ChildWindowCount + 1
         NewSpliter.addWidget(Qweiget_1)
@@ -171,6 +170,8 @@ class NewEditor(MyWindow):
         self.move(ScreenWidth/2 - self.W/2, ScreenHeight/2 - self.H/2)
     def initUI(self):
         #self.setFixedSize(self.W,self.H)#禁止改变大小
+        self.THIS_MAIN_WIDGET = QWidget()
+        self.setCentralWidget(self.THIS_MAIN_WIDGET)
         self.User = getpass.getuser()
         #self.setGeometry(300, 300, 250, 150)
         # #(x, y, w, h)
@@ -183,14 +184,13 @@ class NewEditor(MyWindow):
         self.TopDIV.setMaximumHeight(30)
         #self.VboxLayOut_This.addWidget(self.TopDIV)
         #VBoxLayout
-        self.Tool_head_DIV = QWidget(self.widget)
+        '''self.Tool_head_DIV = QWidget(self.widget)
         self.Tool_head_DIV.move(30,0)
         self.Tool_head_DIV.resize(390,29)
-        self.Tool_head_DIV.setObjectName('Tool_head_DIV')
+        self.Tool_head_DIV.setObjectName('Tool_head_DIV')'''
         self.MakeToolDIV()
         #this
         #设置标题栏的tip-path
-        self.label_2.setToolTip(self.Config['path'])
         self.makeTabWidget(TabBar.editors)
         #make tabs widget
         #self.MainWidget = QWidget()
@@ -203,16 +203,53 @@ class NewEditor(MyWindow):
         self.boxlayout_1.addWidget(self.Toptabs)
         #self.Toptabs.setMaximumHeight(45)
         #self.boxlayout_1.addWidget(self.MainWidget)
-        self.BottomDiv = QWidget()
-        self.BottomDiv.setContentsMargins(0,0,0,0)
-        self.BottomDiv.setMaximumHeight(20)
-        self.BottomDiv.setMinimumHeight(20)
-        self.BottomDiv.setObjectName('BottomDiv')
-        self.boxlayout_1.addWidget(self.BottomDiv)
-        self.widget_2.setLayout(self.boxlayout_1)
+        self.THIS_MAIN_WIDGET.setLayout(self.boxlayout_1)
+        self.THIS_MAIN_WIDGET.setObjectName('THIS_MAIN_WIDGET')
         #init后续初始化
         #初始化-1
         self.MakeChildWindow()
+        #
+        QApplication.setStyle('windowsvista')
+        self.setWindowIcon(QIcon('./img/appicon/icon32.png'))
+        #Status
+        self.statusBar().showMessage("Ready Start MCS")
+        self.onSetTheme('Light')
+    def onSetTheme(self, theme):
+        if (theme == 'Light'):
+            self.Theme['bg'] = '#e1e1e1'
+            print_(QStyleFactory.keys())
+            style = QStyleFactory.create('windowsvista')
+            QApplication.setStyle(style)
+            palette = style.standardPalette()
+            palette.setColor(QPalette.Mid, QColor(232, 243, 251))
+            palette.setColor(QPalette.Button, QColor("#f5f5f5"))
+            QApplication.setPalette(palette)
+        elif (theme == 'Dark'):
+            self.Theme['bg'] = '#444'
+            QApplication.setStyle('windowsvista')
+            palette = QPalette()
+            palette.setColor(QPalette.Window, QColor(50, 50, 50))
+            palette.setColor(QPalette.WindowText, QColor(220, 220, 220))
+            palette.setColor(QPalette.Base, QColor(30, 30, 30))
+            palette.setColor(QPalette.AlternateBase, QColor(40, 40, 40))
+            palette.setColor(QPalette.Highlight, QColor(23, 92, 118))
+            palette.setColor(QPalette.HighlightedText, Qt.white)
+            palette.setColor(QPalette.ToolTipBase, palette.color(QPalette.Highlight))
+            palette.setColor(QPalette.ToolTipText, palette.color(QPalette.WindowText))
+            palette.setColor(QPalette.Text, palette.color(QPalette.WindowText))
+            palette.setColor(QPalette.BrightText, Qt.red)
+            palette.setColor(QPalette.Button, palette.color(QPalette.Window))
+            palette.setColor(QPalette.ButtonText, palette.color(QPalette.WindowText))
+            palette.setColor(QPalette.Link, palette.color(QPalette.Highlight).lighter())
+            palette.setColor(QPalette.LinkVisited, palette.color(QPalette.Highlight))
+            palette.setColor(QPalette.Disabled, QPalette.Text, Qt.darkGray)
+            palette.setColor(QPalette.Disabled, QPalette.ButtonText, Qt.darkGray)
+            palette.setColor(QPalette.Midlight, QColor(66, 66, 66))
+            palette.setColor(QPalette.Mid, QColor(32, 66, 85))
+            QApplication.setPalette(palette)
+        else:
+            print('未知主题样式')
+
     def recursiveDict(self,dict,parentWidget):
         SplitterSize = [0,0]
         This_Dict = {}
@@ -384,7 +421,7 @@ background-position: center center;}
                 print('[Error] : Starter<'+item+f'> failed {str(time.localtime().tm_hour)}:{str(time.localtime().tm_min)}:{str(time.localtime().tm_sec)}\n',e)
                 print(traceback.format_exc())
     def MakeToolDIV(self):#菜单栏部分
-        self.ToolBar = []
+        '''self.ToolBar = []
         self.layoutBox_Head = QHBoxLayout()
         #layout
         self.Tool_file = QPushButton('文件(F)')
@@ -396,40 +433,40 @@ background-position: center center;}
         self.Tool_help = QPushButton("帮助(H)")
         self.Tool_about = QPushButton("关于(A)")
         self.Tool_about.clicked.connect(self.Tool_about_APP)
-        self.layoutBox_Head.addWidget(self.Tool_file)
-        self.layoutBox_Head.addWidget(self.Tool_edit)
-        self.layoutBox_Head.addWidget(self.Tool_select)
-        self.layoutBox_Head.addWidget(self.Tool_run)
-        self.layoutBox_Head.addWidget(self.Tool_control)
-        self.layoutBox_Head.addWidget(self.Tool_help)
-        self.layoutBox_Head.addWidget(self.Tool_about)
-        self.layoutBox_Head.setSpacing(0)
-        self.layoutBox_Head.setContentsMargins(0,0,0,0)
-        #list
         self.ToolBar.append(self.Tool_file)
         self.ToolBar.append(self.Tool_edit)
         self.ToolBar.append(self.Tool_select)
         self.ToolBar.append(self.Tool_run)
         self.ToolBar.append(self.Tool_control)
         self.ToolBar.append(self.Tool_help)
-        self.ToolBar.append(self.Tool_about)
-        #self
-        self.Tool_head_DIV.setLayout(self.layoutBox_Head)
+        self.ToolBar.append(self.Tool_about)'''
+        #
+        menubar = self.menuBar()
+        #bar
+        ###
+        exitAct = QAction(QIcon('exit.png'), '&Exit', self)
+        exitAct.setShortcut('Ctrl+Q')
+        exitAct.setStatusTip("Exit application")
+        exitAct.triggered.connect(qApp.quit)
+        fileMenu = menubar.addMenu("文件(F)")
+        fileMenu.addAction(exitAct)
+        ####
+        editMenu = menubar.addMenu("编辑(E)")
+        ###
+        select = menubar.addMenu("选择(S)")
+        ###
+        run = menubar.addMenu("运行(R)")
+        ###
+        setting = menubar.addMenu("设置(C)")
+        ###
+        help = menubar.addMenu("帮助(H)")
+        ###
+        about = menubar.addMenu("关于(A)")
     #非UI的都写在下面
     def UseTheme(self):
         styleFile = './style/main.qss'
         qssStyle = StyleReader.readQSS(styleFile)
         self.setStyleSheet(qssStyle)
-    def focusInEvent(self, a0: PyQt5.QtGui.QFocusEvent):
-        # super().focusInEvent(a0)
-        self.label_2.setStyleSheet('color:#666 !important;')
-        for Button in self.ToolBar:
-            Button.setStyleSheet('color:#232323;')
-    def focusOutEvent(self, a0: PyQt5.QtGui.QFocusEvent):
-        self.label_2.setStyleSheet('color:#aaa !important;')
-        for Button in self.ToolBar:
-            Button.setStyleSheet('color:#666;')
-        pass
     def closeEvent(self, event):
         with open('./config/config.json','r',encoding='utf-8') as ReadConfig:
             getThisConfig = eval(ReadConfig.read())
@@ -559,7 +596,7 @@ background-position: center center;}
         Pos_X = sender.mapToGlobal(sender.pos()).x()#控件相对于屏幕的位置
         Pos_Y = sender.mapToGlobal(sender.pos()).y()
         print(Pos_X,Pos_Y,Width_,Height_)
-        globals()['PanelWindow_This_'+str(self.panelWindowCount)] = PanelWindow()
+        globals()['PanelWindow_This_'+str(self.panelWindowCount)] = QMainWindow(self)
         thisWindow = globals()['PanelWindow_This_'+str(self.panelWindowCount)]
         thisWindow.resize(Width_+35,Height_+28)
         thisWindow.show()
@@ -573,31 +610,20 @@ background-position: center center;}
         #
         thisWindow.Config = self.Config
         #
-        thisWindow.WindowName.setText(sender.objectName())
-        #thisWindow.WindowName.clicked.connect(self.OutTheChoicePanel)
-        thisWindow.WindowName.setToolTip(sender.objectName())
+        thisWindow.THIS_MAIN_WIDGET = QWidget()
         #WindowLineList.append(Line)
         #给名称设置样式-icon
         IconPath = WindowMenuThis.WindowMenu[sender.objectName()]['icon']
-        thisWindow.WindowName.setIcon(QIcon(IconPath))
-        thisWindow.WindowName.setStyleSheet('''background-image: url(./img/bottom_to.png);
-                                            background-position:right center;
-                                            background-repeat:no-repeat;
-                                            padding-right:15px;
-                                            background-color:#CAE6FC;
-                                            margin-left:5px;
-                                            border-radius:4px;''')
-        #WindowName.setMaximumWidth(7*len(dict['Window']))
-        thisWindow.WindowName.setObjectName('WindowName')
-        #thisWindow.horizontalLayout.addWidget(thisWindow.WindowName)
-        thisWindow.WindowName.move(15,15)
-        Starter.PanelStarter(thisWindow.WindowName,thisWindow,sender.objectName())#def PanelStarter(Sender:QPushButton,self,Name) -> None:#导入模块部分
+        #Starter.PanelStarter(thisWindow.WindowName,thisWindow,sender.objectName())#def PanelStarter(Sender:QPushButton,self,Name) -> None:#导入模块部分
         Name = sender.objectName()
         thisLayout = QVBoxLayout()
         thisLayout.setContentsMargins(0,0,0,0)
         thisLayout.setSpacing(0)
         #thisWindow.widget_2.setStyleSheet('*{border-bottom-left-radius:7px;border-bottom-right-radius:7px;}')
-        thisWindow.widget_2.setLayout(thisLayout)
+        thisWindow.setCentralWidget(thisWindow.THIS_MAIN_WIDGET)
+        thisWindow.THIS_MAIN_WIDGET.setLayout(thisLayout)
+        thisWindow.THIS_MAIN_WIDGET.setObjectName('THIS_MAIN_WIDGET_')
+        thisWindow.setWindowTitle(Name)
         #give value
         thisWindow.EditorList = self.EditorList
         thisWindow.Editorindex = self.Editorindex

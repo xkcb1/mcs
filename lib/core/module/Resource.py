@@ -80,7 +80,7 @@ def setupUi(self, Frame):
     bottomInfoPanel.setMaximumHeight(20)
     bottomInfoPanel.setMinimumHeight(20)
     bottomInfoPanel.setObjectName("bottomInfoPanel_Resource")
-    bottomInfoPanel.setStyleSheet('''border:0px;background-color: #f9f9f9;color:#aaa;border-top:1px solid #e5e5e5;
+    bottomInfoPanel.setStyleSheet('''border:0px;border-top:1px solid #e5e5e5;
                                   border-bottom-left-radius:7px;border-bottom-right-radius:7px;''')
     #
     self.verticalLayout_.setContentsMargins(0,0,0,0)

@@ -2,6 +2,7 @@
 import os
 import sys
 import PyQt5.QtGui
+import vtk
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
@@ -56,7 +57,6 @@ QTabBar::tab {
 }
 QTabBar::tab:selected {
     border-top: 2px solid #4888ff !important;
-    background-color: #eee;
     padding-left: 5px;
     padding-right:0px;
     border-right: 1px solid #ccc;
@@ -69,12 +69,11 @@ QTabBar::tab:first {
     border-left: 0px !important;
 }
 #ModelEditor {
-    background-color: #eee;
     padding: 0px;
     border: 0px !important;
 }
 QTabBar::tab-bar{
-    background-color: #ddd;
+
 }
 QTabWidget::pane{
 	border:none;
@@ -92,8 +91,24 @@ QTabWidget {
     ThisWidget_layout = QHBoxLayout()
     self.MODELThisWidget.setLayout(ThisWidget_layout)
     ThisWidget_layout.addWidget(self.ThisLeftDiv)
-
-    ThisWidget_layout.addWidget(self.ModelToptabs)
+    #TOP
+    TopDIV = QWidget()
+    TopDIV.setMaximumHeight(25)
+    TopDIV.setMinimumHeight(25)
+    TOP_Layout = QHBoxLayout()
+    TopDIV.setLayout(TOP_Layout)
+    #
+    ChooseColor = QComboBox()
+    ChooseColor.addItem('black')
+    #
+    MAIN_Widget = QWidget()
+    VLayout = QVBoxLayout()
+    VLayout.setContentsMargins(0,0,0,0)
+    MAIN_Widget.setLayout(VLayout)
+    #
+    VLayout.addWidget(self.TopDIV)
+    VLayout.addWidget(self.ModelToptabs)
+    ThisWidget_layout.addWidget(MAIN_Widget)#self.ModelToptabs
     ThisWidget_layout.setContentsMargins(0, 0, 0, 0)
     ThisWidget_layout.setSpacing(0)
     # test
@@ -105,53 +120,135 @@ ModelFile = {'newNBT': './img/icons/box.svg',
              'openJson': ''}
 model = []
 def AddModelEditor(self, Name, mode,filepath):
+    frame = QWidget()
+    self.ModelToptabs.addTab(
+        frame, QIcon(ModelFile[mode]), Name + '.nbt')
+    # self.ModelToptabs.currentChanged.connect(ClickTextEditor)
+    self.index = self.index + 1
 
+    ThisModelLayout = QVBoxLayout(frame)
+    ThisModelLayout.setContentsMargins(0,0,0,0)
+    frame.setLayout(ThisModelLayout)
+    ren = vtk.vtkRenderer()
+    vtkWidget = QVTKRenderWindowInteractor(frame)
+    ThisModelLayout.addWidget(vtkWidget)
+    vtkWidget.GetRenderWindow().AddRenderer(ren)
+    iren = vtkWidget.GetRenderWindow().GetInteractor()
+    ren.SetBackground(0, 0, 0) # 设置背景颜色
+    ##############################################################################
+    # 加载stl三维模型
+    filename = filepath
+    ren.AddActor(Add3DByReadSTLFile(self,ren,filename))
+    ##############################################################################
+    # 绘制三维线
+    ren.AddActor(Add3DLine(self,ren))
+    ###############################################################################
+    # 绘制三维坐标轴
+    ##########################################################################
+    #ren.AddActor(Add3DSphere(self,ren))
+    ###########################################################################
+    ren.ResetCamera()
+    iren.Initialize()
+def Add3DByReadSTLFile(self,ren,filename):
+    """读取STL文件加载三维模型"""
+    # Read stl
+    reader = vtk.vtkOBJReader()
+    reader.SetFileName(filename)
+    # Create a mapper
+    mapper = vtk.vtkPolyDataMapper()
+    mapper.SetInputConnection(reader.GetOutputPort())
+    # Create an actor
+    actor = vtk.vtkActor()
+    actor.SetMapper(mapper)
+    actor.GetProperty().EdgeVisibilityOn()  # 加载边缘信息
+    # actor.GetProperty().SetColor(0.0, 1.0, 2.0)  # rgb 红绿蓝
+    ren.AddActor(actor)
 
+def Add3DLine(self,ren):
+    """绘制三维图上的线"""
+    colors = vtk.vtkNamedColors()
+    for i in range(32):
+        lineSource = vtk.vtkLineSource()
+        lineSource.SetPoint1([0,0,i])
+        lineSource.SetPoint2([32,0,i])
+        mapper = vtk.vtkPolyDataMapper()
+        mapper.SetInputConnection(lineSource.GetOutputPort())
+        actor = vtk.vtkActor()
+        actor.SetMapper(mapper)
+        actor.GetProperty().SetLineWidth(1)
+        actor.GetProperty().SetColor(colors.GetColor3d("gray"))
+        ren.AddActor(actor)
+    for i in range(32):
+        lineSource = vtk.vtkLineSource()
+        lineSource.SetPoint1([i,0,0])
+        lineSource.SetPoint2([i,0,32])
+        mapper = vtk.vtkPolyDataMapper()
+        mapper.SetInputConnection(lineSource.GetOutputPort())
+        actor = vtk.vtkActor()
+        actor.SetMapper(mapper)
+        actor.GetProperty().SetLineWidth(1)
+        actor.GetProperty().SetColor(colors.GetColor3d("gray"))
+        ren.AddActor(actor)
+    #xx
+    lineSource = vtk.vtkLineSource()
+    lineSource.SetPoint1([0, 0, 32])
+    lineSource.SetPoint2([32, 0, 32])
+    Z = vtk.vtkPolyDataMapper()
+    Z.SetInputConnection(lineSource.GetOutputPort())
+    actor = vtk.vtkActor()
+    actor.SetMapper(Z)
+    actor.GetProperty().SetLineWidth(2)
+    actor.GetProperty().SetColor(colors.GetColor3d("gray"))
+    ren.AddActor(actor)
+    lineSource = vtk.vtkLineSource()
+    lineSource.SetPoint1([32, 0, 0])
+    lineSource.SetPoint2([32, 0, 32])
+    Z = vtk.vtkPolyDataMapper()
+    Z.SetInputConnection(lineSource.GetOutputPort())
+    actor = vtk.vtkActor()
+    actor.SetMapper(Z)
+    actor.GetProperty().SetLineWidth(2)
+    actor.GetProperty().SetColor(colors.GetColor3d("gray"))
+    ren.AddActor(actor)
+    #z
+    lineSource = vtk.vtkLineSource()
+    lineSource.SetPoint1([0, 0, 0])
+    lineSource.SetPoint2([0, 0, 32])
+    Z = vtk.vtkPolyDataMapper()
+    Z.SetInputConnection(lineSource.GetOutputPort())
+    actor = vtk.vtkActor()
+    actor.SetMapper(Z)
+    actor.GetProperty().SetLineWidth(2)
+    actor.GetProperty().SetColor(colors.GetColor3d("green"))
+    ren.AddActor(actor)
+    #x
+    lineSource = vtk.vtkLineSource()
+    lineSource.SetPoint1([0, 0, 0])
+    lineSource.SetPoint2([32, 0, 0])
+    X = vtk.vtkPolyDataMapper()
+    X.SetInputConnection(lineSource.GetOutputPort())
+    actor = vtk.vtkActor()
+    actor.SetMapper(X)
+    actor.GetProperty().SetLineWidth(2)
+    actor.GetProperty().SetColor(colors.GetColor3d("red"))
+    ren.AddActor(actor)
+    #y
+    lineSource = vtk.vtkLineSource()
+    lineSource.SetPoint1([0, 0, 0])
+    lineSource.SetPoint2([0, 32, 0])
+    Y = vtk.vtkPolyDataMapper()
+    Y.SetInputConnection(lineSource.GetOutputPort())
+    actor = vtk.vtkActor()
+    actor.SetMapper(Y)
+    actor.GetProperty().SetLineWidth(2)
+    actor.GetProperty().SetColor(colors.GetColor3d("blue"))
+    ren.AddActor(actor)
+# endregion
 def ClickTextEditor():
     pass
 def openNbtFile():
     filepath = QFileDialog.getOpenFileName(SELF, "选择文件")[0]
     obj_file_path = MakeStlFileByNbt(filepath)
-    fileName = filepath.split('\\')[-1]
+    fileName = filepath.split('/')[-1]
     print(SELF)
     AddModelEditor(SELF, fileName, 'openNBT',obj_file_path)
-    print_(SELF.vtk_widget)
-    SELF.iren.Start()
-class renderX(QThread):   # 创建线程类
-    def __init__(self,Filepath,parent):
-        super(renderX, self).__init__()
-        self.Filepath = Filepath
-        self.parent = parent
-    def run(self):     # 重写run()方法
-        self.parent.frame = QWidget()
-        self.parent.ModelToptabs.addTab(
-        self.parent.frame, QIcon(ModelFile[mode]), Name + '.nbt')
-        # self.ModelToptabs.currentChanged.connect(ClickTextEditor)
-        self.parent.index = self.index + 1
-        #
-        self.parent.vtk_vertical_layout = QVBoxLayout(self.frame)
-        self.parent.frame.setLayout(self.vtk_vertical_layout)
-        self.parent.vtk_widget = QVTKRenderWindowInteractor(self.frame)
-        self.parent.vtk_vertical_layout.addWidget(self.vtk_widget)
-        # 1.创建RenderWindow窗口
-        self.parent.render_window = self.vtk_widget.GetRenderWindow()
-        # 2.创建render
-        self.parent.renderer = vtk.vtkRenderer()
-        self.parent.renderer.SetBackground(1.0, 1.0, 1.0)  # 设置页面底部颜色值
-        self.parent.render_window.AddRenderer(self.renderer)
-        self.parent.render_window.Render()
-        # 3.设置交互方式
-        self.parent.iren = self.render_window.GetInteractor()  # 获取交互器
-        self.parent.style = vtk.vtkInteractorStyleTrackballCamera()  # 交互器样式的一种，该样式下，用户是通过控制相机对物体作旋转、放大、缩小等操作
-        self.parent.style.SetDefaultRenderer(self.renderer)
-        self.parent.iren.SetInteractorStyle(self.style)
-        # 4.添加世界坐标系
-        self.parent.axesActor = vtk.vtkAxesActor()
-        self.parent.axes_widget = vtk.vtkOrientationMarkerWidget()
-        self.parent.axes_widget.SetOrientationMarker(self.axesActor)
-        self.parent.axes_widget.SetInteractor(self.iren)
-        self.axes_widget.EnabledOn()
-        self.axes_widget.InteractiveOff()  # 坐标系是否可移动
-        self.renderer.ResetCamera()
-        self.iren.Initialize()
-        self.iren.Start()

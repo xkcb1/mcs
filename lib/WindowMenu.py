@@ -86,7 +86,7 @@ StarterInfo = {
             },"float":"left"},
         "A":{"size":40,"Window":None,"Children":{
             "RightTopDiv":{"size":60,"Window":"Model","Children":None,"float":"top"},
-            "RightBottomDiv":{"size":30,"Window":"Asset","Children":None,"float":"bottom"},
+            "RightBottomDiv":{"size":10,"Window":"Asset","Children":None,"float":"bottom"},
             },"float":"right"},
         "PROJECT_LIST":['None']},
     "Node":{

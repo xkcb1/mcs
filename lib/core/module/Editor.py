@@ -34,7 +34,6 @@ QTabBar::tab {
 QTabBar::tab:selected {
     margin-top: 0px;
     border-top: 2px solid #4888ff !important;
-    background-color: #eee;
     padding-left: 5px;
     padding-right:0px;
     border-right: 1px solid #ccc;
@@ -47,12 +46,11 @@ QTabBar::tab:first {
     border-left: 0px !important;
 }
 #TextEditor {
-    background-color: #eee;
     padding: 0px;
     border: 0px !important;
 }
 QTabBar::tab-bar{
-    background-color: #ddd;
+    
 }
 QTabWidget::pane{
 	border:none;
@@ -69,7 +67,7 @@ QTabWidget {
     self.EditorToptabs.setContentsMargins(0,0,0,0)
     #self.EditorToptabs.
     parent.addWidget(self.EditorToptabs)
-    parent.parent().setStyleSheet('background-color:#f9f9f9;border: 0px !important;')
+    parent.parent().setStyleSheet('border: 0px !important;')
     #new一个新的
     NewTextEditor(self,'untitled','print(1)','python',index=0)
     NewTextEditor(self,'text','print(2)','python',index=0)
@@ -79,7 +77,7 @@ def ClickTextEditor():
     pass
 def NewTextEditor(self,Name,Text,filetype,index):
     globals()[Name+"_Widget"] = QWidget()
-    globals()[Name+"_Widget"].setStyleSheet('border: 0px !important;background-color:#fff;border-radius: 0px 0px 5px 5px !important;')
+    globals()[Name+"_Widget"].setStyleSheet('border: 0px !important;border-radius: 0px 0px 5px 5px !important;')
     globals()[Name+"_Path"] = QWidget()
     InfoLabelLayout = QHBoxLayout(globals()[Name+"_Path"])
     InfoLabelLayout.setContentsMargins(0,0,0,0)
@@ -98,7 +96,7 @@ def NewTextEditor(self,Name,Text,filetype,index):
     globals()[Name] = CodeWidget(globals()[Name+"_Path_Label"])
     
     globals()[Name+"_Path"].setObjectName("Function_Path")
-    globals()[Name+"_Path"].setStyleSheet('border: 0px !important;background-color:#f9f9f9;border-radius: 0px 0px 5px 5px !important;color:#666;border-top:1px solid #e5e5e5;')
+    globals()[Name+"_Path"].setStyleSheet('border: 0px !important;border-radius: 0px 0px 5px 5px !important;border-top:1px solid #e5e5e5;')
     globals()[Name+"_Path"].setMaximumHeight(20)
     globals()[Name+"_Path"].setMinimumHeight(20)
     globals()[Name+"_Layout"] = QVBoxLayout()

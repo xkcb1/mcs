@@ -68,7 +68,7 @@ def init(parent,Name,self):
     bottomWidget.setMaximumHeight(20)
     bottomWidget.setMinimumHeight(20)
     ThisLayout.addWidget(bottomWidget)
-    bottomWidget.setStyleSheet('border:0px;border-top:1px solid #e5e5e5;background-color:#f5f5f5;color:#666;')
+    bottomWidget.setStyleSheet('border:0px;border-top:1px solid #e5e5e5;')
     treeView.setColumnCount(2)
     treeView.setHeaderLabels(['Key','Value'])
     #treeView.setStyle(QStyleFactory.create('windows'))

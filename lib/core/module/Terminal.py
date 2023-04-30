@@ -40,7 +40,6 @@ QTabBar::tab {
 }
 QTabBar::tab:selected {
     border-top: 2px solid #4888ff !important;
-    background-color: #eee;
     padding-left: 5px;
     padding-right:0px;
     border-right: 1px solid #ccc;
@@ -53,12 +52,10 @@ QTabBar::tab:first {
     border-left: 0px !important;
 }
 #Terminal {
-    background-color: #eee;
     padding: 0px;
     border: 0px !important;
 }
 QTabBar::tab-bar{
-    background-color: #ddd;
     margin-left:20px;
 }
 QTabWidget::pane{
@@ -87,14 +84,11 @@ QTabWidget {
 #terminal_button {
     border-top: 1px solid #e5e5e5;
     border-right: 1px solid #e5e5e5;
-    background-color:#f1f1f1;
     border-bottom: 1px solid #e5e5e5;
 }
 #OptionBar {
-    background-color:#f9f9f9;
 }
 #terminal_button:hover {
-    background-color:#f1f1f1;
 }
 ''')
     ThisWidget_layout.addWidget(OptionBar)
@@ -159,7 +153,7 @@ def AddTerminal( Name, mode):
         ThisLayout.setContentsMargins(0, 0, 0,0)
         ThisLayout.setSpacing(0)
         thisOutput = QTextBrowser()
-        thisOutput.setStyleSheet('''color:black;background-color:#f5f5f5;font-family:Courier New;''')
+        thisOutput.setStyleSheet('''font-family:Courier New;''')
         ThisInputEdit = PPythonConsole()
         ThisInputEdit.setMaximumHeight(20)
         ThisInputEdit.setMinimumHeight(20)
@@ -169,7 +163,6 @@ def AddTerminal( Name, mode):
         ThisInputEdit.setStyleSheet('''
 #ThisInputEdit{
     border-top: 1px solid #ddd;
-    background-color:#efefef;
     background-image: url(./img/icons/edit-4.png);
     background-repeat: no-repeat;
     background-position: center right;
@@ -180,7 +173,6 @@ def AddTerminal( Name, mode):
 }
 #ThisInputEdit:hover {
     border-bottom:1px solid #4888FF;
-    background-color:#eaeaea;
 }''')
         ThisLayout.addWidget(thisOutput)
         ThisLayout.addWidget(ThisInputEdit)
@@ -192,7 +184,7 @@ def AddTerminal( Name, mode):
         ThisLayout.setSpacing(0)
         globals()['output_'+str(SELF.outputIndex)] = QTextBrowser()
         thisOutput = globals()['output_'+str(SELF.outputIndex)]
-        thisOutput.setStyleSheet('''color:#888;background-color:#f5f5f5;font-family:Courier New;''')
+        thisOutput.setStyleSheet('''font-family:Courier New;''')
         ThisLayout.addWidget(thisOutput)
         ThisTabWidget.setLayout(ThisLayout)
         thisOut = ''
@@ -208,7 +200,7 @@ def AddTerminal( Name, mode):
         ThisLayout.setContentsMargins(0, 0, 0,0)
         ThisLayout.setSpacing(0)
         thisOutput = QTextBrowser()
-        thisOutput.setStyleSheet('''color:black;background-color:#f5f5f5;font-family:Courier New;''')
+        thisOutput.setStyleSheet('''font-family:Courier New;''')
         ThisInputEdit = PLuaConsole()
         ThisInputEdit.setMaximumHeight(20)
         ThisInputEdit.setMinimumHeight(20)
@@ -218,7 +210,6 @@ def AddTerminal( Name, mode):
         ThisInputEdit.setStyleSheet('''
 #ThisInputEdit{
     border-top: 1px solid #ddd;
-    background-color:#efefef;
     background-image: url(./img/icons/edit-4.png);
     background-repeat: no-repeat;
     background-position: center right;
@@ -229,7 +220,6 @@ def AddTerminal( Name, mode):
 }
 #ThisInputEdit:hover {
     border-bottom:1px solid #4888FF;
-    background-color:#eaeaea;
 }
 ''')
         ThisLayout.addWidget(thisOutput)

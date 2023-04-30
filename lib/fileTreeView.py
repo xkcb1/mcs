@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import *
 import PyQt5.QtWidgets
 from PyQt5.QtCore import *
 from lib.StyleReader import StyleReader
-from lib.newWindow import *
 import getpass
 from lib.readConfig import readConfig
 def CreateFileTree(self):

@@ -4,7 +4,6 @@ from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from lib.StyleReader import StyleReader
-from lib.newWindow import *
 from newProject import NewProjectWindow
 from Main import NewEditor
 from lib.ProjectType import ProjectType,ProjectTypeTab
@@ -62,8 +61,7 @@ else:
     editor.H = getconfig['h']
     editor.resize(editor.W,editor.H)
     editor.title = f"MC studio ({editor.User}) - {ProjectType[getconfig['type']]} : {getconfig['name']}"
-    editor.setWindowTitle(editor.title)
-    editor.label_2.setText(f"MC studio ({editor.User}) - {ProjectType[getconfig['type']]} : {getconfig['name']}")#title
+    editor.setWindowTitle(f"MC studio ({editor.User}) - {ProjectType[getconfig['type']]} : {getconfig['name']}")#title
     if getconfig['x'] != None and getconfig['y'] != None:
         editor.move(getconfig['x'],getconfig['y'])
     editor.show()

@@ -9,12 +9,12 @@ def init(parent: QVBoxLayout, Name, self):
     scroll = QScrollArea()
     scroll.setObjectName('scroll')
     scroll.setStyleSheet(
-        '#scroll{background-color:#f9f9f9;border:0px !important;}')
+        '#scroll{border:0px !important;}')
     lb.setContentsMargins(10, 5, 5, 0)
     MainWidgetThis = QWidget()
     MainWidgetThis.setObjectName('MainWidgetThis_Attr')
     MainWidgetThis.setStyleSheet(
-        '''#MainWidgetThis_Attr{background-color:#f9f9f9;border:0px !important;border-bottom-left-radius: 7px;
+        '''#MainWidgetThis_Attr{border:0px !important;border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;}''')
     MainWidgetThis.setLayout(lb)
     MainWidgetThis.setContentsMargins(0, 0, 0, 0)
@@ -38,7 +38,6 @@ def UiInit(layout: QVBoxLayout, self) -> None:
     layout.addWidget(SearchInput_Attribute_Widget)
     searchComBox = QComboBox()
     searchComBox.setStyleSheet('''
-background-color:#f6f6f6;
 border:1px solid #ccc;
 outline:none;
 border-radius:4px;
@@ -51,7 +50,6 @@ border-right:0px;
     Search.setMinimumHeight(20)
     Search.setStyleSheet('''
 border:1px solid #ccc;
-background-color:#f6f6f6;
 border-radius:4px;
 border-top-left-radius:0px;
 border-bottom-left-radius:0px;

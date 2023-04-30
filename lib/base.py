@@ -29,6 +29,9 @@ from vtk import *
 from vtk.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
 from lib.pure.MakeObj import MakeStlFileByNbt
 #方便一次性导入所有的基础要用的库
+import threading
+from threading import *
+#多线程库
 ################################################################
 rewrite_print = print
 print_ = print
@@ -93,7 +96,6 @@ class AttributePanel(QFrame):
         self.setObjectName('ATTRIBUTEPanel')
         self.setStyleSheet('''
 #ATTRIBUTEPanel{
-    background-color: #f6f6f6;
     border-radius:4px;
     border:1px solid #ddd
 }
@@ -183,7 +185,6 @@ class AttributePanel(QFrame):
                     EditItemWidget.ClassName = str(self.count)
                 EditItemWidget.setText(self.Attribute[EditItem])
                 ItemName.setStyleSheet('''
-                                   color:#111;
                                    background-image:url(./img/gray2.png);
                                    background-repeat:no-repeat;
                                    padding-left:15px;
@@ -197,7 +198,6 @@ class AttributePanel(QFrame):
                     EditItemWidget.clicked.connect(self.changeButton)
                     EditItemWidget.ClassName = str(self.count)
                 ItemName.setStyleSheet('''
-                                   color:#111;
                                    background-image:url(./img/blue2.png);
                                    background-repeat:no-repeat;
                                    padding-left:15px;
@@ -211,7 +211,6 @@ class AttributePanel(QFrame):
                     EditItemWidget.clicked.connect(self.changeButton)
                     EditItemWidget.ClassName = str(self.count)
                 ItemName.setStyleSheet('''
-                                   color:#111;
                                    background-image:url(./img/yellow2.png);
                                    background-repeat:no-repeat;
                                    padding-left:15px;
@@ -225,7 +224,6 @@ class AttributePanel(QFrame):
                     EditItemWidget.clicked.connect(self.changeButton)
                     EditItemWidget.ClassName = str(self.count)
                 ItemName.setStyleSheet('''
-                                   color:#111;
                                    background-image:url(./img/purple2.png);
                                    background-repeat:no-repeat;
                                    padding-left:15px;
@@ -241,7 +239,6 @@ class AttributePanel(QFrame):
                 for item in self.Attribute[EditItem]:
                     EditItemWidget.addItem(item)
                 ItemName.setStyleSheet('''
-                                   color:#111;
                                    background-image:url(./img/organe2.png);
                                    background-repeat:no-repeat;
                                    padding-left:15px;
@@ -468,7 +465,7 @@ class FlowBox(QWidget):
         self.NameLabel.setMinimumWidth(40)
         self.NameLabel.setStyleSheet('''font-family: monospace;
                                      font-size:10px;
-                                     color:#222;''')
+                                     ''')
         self.NameLabel.setToolTip(self.name)
         #add
         self.ThisLayout.addWidget(self.IconLabel)

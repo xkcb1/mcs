@@ -1,12 +1,10 @@
 /*fileTreeView*/
 QTreeView {
     background-color: transparent;
-    color: #222;
     border: 0px;
     outline:0px;
     padding-top: 2px;
     padding: 4px;
-    background-color: #f9f9f9;
 }
 QTreeView:focus {
     border: 1px solid #4888FF;
@@ -18,22 +16,16 @@ QTreeView::item {
     margin-bottom: 1px;
 }
 QTreeView::item:hover {
-   color: #222;
-   background-color: #eee;
    margin-right: 1px;
    margin-right: 3px;
 }
 QTreeView::item:selected {
     border: 1px solid #ccc;
-    background-color: #eaeaea;
     margin-right: 3px;
-    color: #222;
 }
 QTreeView::item:selected:active{
-    background-color: #eaeeea;
 }
 QTreeView::item:selected:!active {
-    color : #222;
 }
 /*line*/
 QTreeView::branch:has-siblings:!adjoins-item {
