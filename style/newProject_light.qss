@@ -1,0 +1,423 @@
+#MainWidget {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-radius: 7px !important;
+}
+#leftDiv {
+    background-color: #f9f9f9;
+    border-right: 1px solid #e5e5e5;
+}
+#rightDiv {
+    background-color: #f9f9f9;
+}
+#bottomDiv {
+    background-color: #e1e1e1;
+    border-top: 1px solid #e5e5e5;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+#LeftTitle1 {
+    color: #222;
+    font-size: 13px;
+    background-color: #f5f5f5;
+    padding-left: 5px;
+}
+#LeftTitle2 {
+    color: #222;
+    font-size: 13px;
+    background-color: #f5f5f5;
+    padding-left: 5px;
+}
+#SearchInput {
+    background-color: #eee;
+    color: #111;
+    outline: none;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    border-right: 1px solid #e5e5e5;
+    background-image: url('./img/Icon.targetsize-256.png');
+    background-repeat: no-repeat;
+    padding-left: 20px;
+    font-size: 14px;
+    border-radius: 0px !important;
+}
+#SearchInput:hover {
+    background-color: #eee;
+}
+#SearchButton {
+    border-radius:0px;
+    color: #222;
+    background-color: #eee;
+}
+#SearchButton:hover {
+    background-color: #eee;
+    color: #222;
+}
+#Left_BG {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+}
+#ListWidgetThis {
+    background-color: #f5f5f5;
+    padding: 0px;
+    outline: none;
+    margin: 0px;
+    border: 1px solid #e5e5e5;
+}
+#ListItem {
+    font-size: 15px;
+    border-radius: 2px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+#ListWidgetThis::item {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+#BigText {
+    color: #111;
+    font-size: 13px;
+    font-family: "Microsoft YaHei",微软雅黑;
+}
+#SmallText {
+    font-size: 10px;
+    font-family: "Microsoft YaHei",微软雅黑;
+    color: #444;
+}
+/*NewProject_Choose*/
+#ProjectListChoose {
+    background-color: #f5f5f5;
+    border: 0px;
+    padding-left: 2px;
+    padding-right: 3px;
+}
+#_ListItem_ {
+    color: #222;
+    border-radius: 3px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+#_BigText_ {
+    color: #111;
+    font-size: 13px;
+    padding-left: 30px;
+}
+/*QButton-BottomDiv*/
+#AcceptButton {
+    background-color: rgb(59, 108, 165);
+    border: 1px solid rgb(61, 146, 207);
+    border-radius: 5px;
+    color: #ddd;
+    margin-left: 10px;
+    font-size: 12px;
+    margin-top: 2px;
+}
+#AcceptButton:hover {
+    color: white;
+    border: 3px solid rgb(81, 153, 209);
+}
+#AcceptButton:focus {
+    border: 3px solid rgb(81, 153, 209);
+}
+/*ExitButton*/
+#ExitButton:hover {
+    color: #555;
+    border: 3px solid #999;
+}
+#ExitButton:focus {
+    border: 3px solid #999;
+}
+#ExitButton {
+    background-color: #eee;
+    border: 1px solid #222;
+    border-radius: 5px;
+    color: #222;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-left: 10px;
+}
+#WHAT {
+    border-radius: 13px;
+    background-color: rgb(116, 124, 131);
+    color: #222;
+    border: 1px solid rgb(141, 152, 161);
+    font-size: 18px;
+    font-family: "Microsoft YaHei",微软雅黑;
+}
+#WHAT:hover {
+    background-color: rgb(103, 109, 114);
+    color: #333;
+}
+#more {
+    background-color: #f5f5f5;
+    color: #222;
+    border-top: 1px solid #555;
+}
+#OPEN_Button {
+    width: calc(100% - 4px);
+    height: 26px !important;
+    border-radius: 13px;
+    background-color: #f9f9f9;
+    padding: 0px;
+    border: 1px solid #e5e5e5;
+    padding-left: 30px;
+    background-image: url('./img/open.png');
+    background-repeat: no-repeat;
+    text-align: left;
+    color: #222;
+}
+#OPEN_Button:hover {
+    background-color: #eee;
+    border: 1px solid #3c556e;
+}
+#OPEN_Button:focus {
+    border: 1px solid #4890FF;
+}
+/*RIGHT_DIV*/
+#RightTitle {
+    color: #222;
+    font-family: "Microsoft YaHei",微软雅黑;
+}
+#GRIDlayout {
+    height: 300px !important;
+}
+#BaseSetting {
+    color: #222;
+    border-bottom: 1px solid #777;
+    font-size: 13px;
+    background-color: transparent;
+}
+/*all*/
+.QLineEdit,#lepath,.QTextEdit {
+    background-color: #eee;
+    border: 2px solid #646464;
+    height: 22px !important;
+    border-radius: 3px;
+    color: #111;
+    font-size: 14px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.QLineEdit:hover,#lepath:hover,.QTextEdit:hover {
+    border: 2px solid #3c556e;
+    background-color: #eee;
+} /*#466D94;*/
+.QLineEdit:focus,#lepath:focus,.QTextEdit:focus {
+    border: 2px solid #466D94;
+}
+QCheckBox {
+    background-color: #eee;
+    color: #222;
+}
+QCheckBox::indicator  {
+    background-color: #ddd;
+    height: 8px;
+    width: 8px;
+    border-radius: 7px;
+    border: 3px solid rgb(122, 122, 122);
+}
+QCheckBox::indicator:hover {
+    background-color: #eee;
+    border: 3px solid #3c556e;
+}
+QCheckBox::indicator::checked  {
+    background-color: #aaa;
+    border: 3px solid #4890FF;
+}
+QCheckBox::indicator::unchecked  {
+    background-color: #ddd;
+    height: 8px;
+    width: 8px;
+    border-radius: 7px;
+    border: 3px solid rgb(122, 122, 122);
+}
+/*all in there*/
+QListView::item:selected {
+   background-color: #e1e1e1;
+   border: 1px solid #4890FF;
+}
+QListView::item:selected:active {
+    background: #4B6EAF;
+}
+/*NewProject_UI.qss*/
+
+/*more qss(css)*/
+#lepath {
+    background: url('./img/folder.png');
+    background-repeat: no-repeat;
+    text-align: left;
+    padding-left: 23px;
+}
+/*make the qss(css) scrollBar*/
+
+QComboBox:focus {
+    border: 1px solid #567dbc;
+    outline: none;
+    
+}
+QComboBox:hover {
+    background-color: transparent;
+    outline: none;
+}
+QComboBox:editable {
+    background: white;
+    outline: none;
+}
+QComboBox::down-arrow {
+    outline: none;
+    background-color: transparent;
+    image: url(./img/bottom_to.png);
+}
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+    border-left-color: darkgray;
+    border-left-style: solid; /* just a single line */
+    border-top-right-radius: 3px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 3px;
+}
+QComboBox QAbstractItemView {
+    background-color: #22262A;
+    color: #222;
+    border: 1px solid #567dbc;
+}
+QLabel {
+    color: #ccc;
+}
+QScrollBar 
+{
+    background:transparent;
+    padding-top:6px;
+    padding-bottom:6px;
+}
+/**/
+QScrollBar:vertical 
+{
+    width: 10px;
+}
+QScrollBar:horizontal
+{
+    width: 10px;
+}
+QScrollBar::handle
+{
+    background:rgba(0, 0, 0, 0.2);
+    margin-left:3px;
+    margin-right:3px;
+    border-radius: 2px;
+}
+QScrollBar::handle:hover
+{
+    background:darkgray;
+    margin-left: 2px;
+    margin-right: 2px;
+    border-radius: 3px;
+}
+QScrollBar::add-line
+{
+    height:14px;width:8px;
+    image:url('')
+}
+QScrollBar::sub-line
+{
+    height:14px;width:8px;
+    image:url('')
+}
+QScrollBar::add-line:hover
+{
+    height:14px;width:8px;
+    subcontrol-position:bottom;
+}
+QScrollBar::sub-line:hover 
+{
+    height:14px;width:8px;
+    subcontrol-position:top;
+}
+QScrollBar::add-page
+{
+    background:transparent;
+}
+QScrollBar::sub-page
+{
+    background:transparent; 
+}
+QScrollBar:hover
+{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#widget_2{
+    background-color: #f5f5f5;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+#thisTabWidget {
+    background-color: #fff;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+#THIS_Widget {
+    margin: 7px;
+    position: absolute;
+    background-color: #fff;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    border-radius: 7px !important;
+    border: 1px inset #aaa !important;
+    padding: 1px;
+}
+/*button*/
+#pushButton {
+    /*small*/
+    border: 0px;
+    background: url('./img/small_black.png');
+    background-repeat: no-repeat;
+    background-position: 7.5px 0px !important;
+}
+#pushButton_2 {
+    /*full*/
+    border: 0px;
+    background: url('./img/full_black.png');
+    background-repeat: no-repeat;
+    background-position: 7.5px 0px !important;
+}   
+#pushButton_3 {
+    /*close*/
+    border: 0px;
+    background: url('./img/close_black_2.png');
+    background-repeat: no-repeat;
+    background-position: 7.5px 0px !important;
+}
+#pushButton_3:hover {
+    background-color: #E81123;
+    border-top-right-radius: 7px;
+    background-image: url('./img/close.png')
+}
+#pushButton_3:checked {
+    background-color: #F1707A;
+    border-top-right-radius: 7px;
+}
+#pushButton_2:hover,#pushButton:hover {
+    background-color: rgb(219, 219, 219);
+}
+#title_ {
+    color: #555;
+    font-family: "Microsoft YaHei",微软雅黑;
+    border-radius: 4px;
+}
+#title_:hover {
+    color:#222;
+}
+#widget{
+    background-color:#fff;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    height: 30px !important;
+    color: #111;
+}

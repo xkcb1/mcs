@@ -1,0 +1,81 @@
+Already running the application in Python 3.11.0 (main, Oct 24 2022, 18:26:48) [MSC v.1933 64 bit (AMD64)]
+license files : monaco-LICENSE
+license files : QSS-master-LICENSE
+Resource <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_0
+init -> Resource
+import lib.core.module.Resource successful
+Info <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_1
+import lib.core.module.Info successful
+[info] : successful started<Start> 11:25:13 
+
+Resource <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_2
+init -> Resource
+import lib.core.module.Resource successful
+Asset <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_3
+AssetWidget.Path -> C:/Users/Administrator/Desktop/test project
+import lib.core.module.Asset successful
+Editor <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_4
+init -> Editor
+import lib.core.module.Editor successful
+[info] : successful started<Editor> 11:25:14 
+
+Resource <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_5
+init -> Resource
+import lib.core.module.Resource successful
+NbtViewer <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_6
+import lib.core.module.NbtViewer successful
+Model <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_7
+import lib.core.module.Model successful
+[info] : successful started<Model> 11:25:14 
+
+Resource <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_8
+init -> Resource
+import lib.core.module.Resource successful
+Builtin <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_9
+import lib.core.module.Builtin successful
+Attribute <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_10
+toSmall
+toSmall
+import lib.core.module.Attribute successful
+Node <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_11
+import lib.core.module.Node successful
+[info] : successful started<Node> 11:25:14 
+
+NbtViewer <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_12
+import lib.core.module.NbtViewer successful
+Asset <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_13
+AssetWidget.Path -> C:/Users/Administrator/Desktop/test project
+import lib.core.module.Asset successful
+HexEditor <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_14
+import lib.core.module.HexEditor successful
+[info] : successful started<Nbt> 11:25:14 
+
+Terminal <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_15
+start at:widget->Terminalindex-> 0
+start at:widget->Terminalindex-> 2
+import lib.core.module.Terminal successful
+Resource <Main.NewEditor object at 0x0000022C94E03640>
+new : _Layout_16
+init -> Resource
+import lib.core.module.Resource successful
+[info] : successful started<Terminal> 11:25:14 
+
+Time_thread Start...
+Time_thread Start...
+openNbtfile: ['C:/Users/Administrator/Desktop/mcs_new/test/nbt/badlands_miner_outpost_event_1.nbt']

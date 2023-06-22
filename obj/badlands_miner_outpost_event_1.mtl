@@ -1,0 +1,8 @@
+#Pure material with MakeObj.py default render mode
+#render mode 1
+#Mtl filepath = './obj/badlands_miner_outpost_event_1.mtl'
+newmtl MC_material
+Kd 1 1 1
+Ks 0 0 0
+interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
+map_Kd default-RGBA.png

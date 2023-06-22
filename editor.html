@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <link rel="stylesheet" data-name="vs/editor/editor.main"
+        href="./monaco-editor/min/vs/editor/editor.main.css" />
+    <style>
+        :root {
+            --SELECT_BORDER : rgba(0,0,0,0.2);
+            --SELECT_BG : rgba(0, 127, 212,0.15);
+            --OPTION_WIDGET_BG : rgba(0,0,0,0);
+            --OPTION_WIDGET_BORDER : rgba(0,0,0,0.5);
+            --ALL_COLOR:rgb(30, 30, 30);
+            --SHADOW_COLOR:rgba(0,0,0,0.1);
+        }
+        html,
+        body {
+            position: relative;
+            padding: 0;
+            margin: 0;
+            height: 100%;
+            width: calc(100% - 0px);
+            overflow: hidden;
+        }
+        body {
+            background-color: var(--OPTION_WIDGET_BG);
+            border-left: 1px solid var(--SELECT_BORDER);
+        }
+        #thisEditor {
+            top: 26px;
+            float: top;
+            position: absolute;
+            width: 100%;
+            height: calc(100% - 46px);
+            float: bottom;
+        }
+        #OptionWidget {
+            height: 25px;
+            width: 100%;
+            position: relative;
+            left: 0px;
+            top: 0px;
+            border-bottom: 1px solid var(--OPTION_WIDGET_BORDER);
+            float: top;
+            box-shadow: 0px 2px 3px 2px var(--SHADOW_COLOR);
+            z-index: 999;
+            background-color: var(--OPTION_WIDGET_BG);
+            color:var(--ALL_COLOR);
+        }
+        .VS_SELECT {
+            margin-top: 1px;
+            float: right;
+            height: 23px;
+            border: 1px solid var(--SELECT_BORDER);
+            outline: none;
+            margin-right: 1px;
+            color:var(--ALL_COLOR);
+            background-color: var(--OPTION_WIDGET_BG);
+        }
+        .VS_SELECT:hover {
+            border: 1px solid #007FD4;
+            background-color: rgba(150,150,150,0.3);
+        }
+        .VS_SELECT:focus {
+            border: 1px solid #007FD4;
+        }
+        #bottomDIV {
+            position: absolute;
+            float: bottom;
+            height: 20px;
+            width: 100%;
+            bottom: 0px;
+            background-color: var(--OPTION_WIDGET_BG);
+            border-top: 1px solid var(--SELECT_BORDER);
+            color:var(--ALL_COLOR);
+            font-size: 13px;
+        }
+        #bottomDIV div{
+            float: left;
+            margin-top: 1px;
+            padding-left: 16px;
+            padding-right: 10px;
+            border: 1px solid rgba(0,0,0,0);
+            cursor: default;
+            margin-left: 1px;
+            overflow: hidden;
+        }
+        #bottomDIV div:hover {
+            border: 1px solid #007FD4;
+        }
+        #lineNumber {
+            background-image: url(./img/icons/align-left.svg);
+            background-repeat: no-repeat;
+            background-position: 0px center;
+            background-size: 16px,16px;
+        }
+        #column {
+            background-image: url(./img/icons/bar-chart-2.svg);
+            background-repeat: no-repeat;
+            background-position: 0px center;
+            background-size: 16px,16px;
+        }
+        #tab {
+            background-image: url(./img/icons/columns.svg);
+            background-repeat: no-repeat;
+            background-position: 0px center;
+            background-size: 16px,16px;
+        }
+        #items {
+            height: 16px;
+            position: absolute;
+            left: 165px;
+        }
+        #items div {
+            width: 16px;
+            height: 16px;
+            float: left;
+            margin: 0px;
+            padding: 0px !important;
+            position: relative;
+        }
+        #items a {
+            float: left;
+            padding-top: 2px;
+            margin-right: 10px;
+            font-size: 12px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        #fileName {
+            height: 20px !important;
+            float: left;
+            font-size: 14px;
+            margin-left: 2px;
+            margin-top: 3px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: lighter;
+            padding-right: 10px;
+        }
+        #icon_ {
+            float: left;
+            height: 16px;
+            width: 16px;
+            margin-left: 5px;
+            margin-top: 4px;
+        }
+        #file {
+            float: left;
+            background-color: #007FD4;
+            margin-top: 1px;
+            height: 23px;
+            margin-left: 1px;
+            user-select: none;
+        }
+        #file:hover {
+            background-color: rgba(150,150,150,0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+      var require = {
+        paths: { vs: "./monaco-editor/min/vs" },
+        "vs/nls": { availableLanguages: { "*": "zh-cn" } },
+      };
+    </script>
+    <script src="./monaco-editor/min/vs/loader.js"></script>
+    <script src="./monaco-editor/min/vs/editor/editor.main.nls.js"></script>
+    <script src="./monaco-editor/min/vs/editor/editor.main.nls.zh-cn.js"></script>
+    <script src="./monaco-editor/min/vs/editor/editor.main.js"></script>
+    <script src="./jquery-1.6.2.min.js"></script>
+    <div id="OptionWidget">
+        <div id="file">
+            <div id="icon_" class="suggest-icon codicon codicon-symbol-file"></div>
+            <div id="fileName">untitled</div>
+        </div>
+        <div id='path'></div>
+        <select id="theme" class="VS_SELECT">
+            <option>vs-dark</option>
+            <option>vs-light</option>
+            <option>hc-black</option>
+        </select>
+        <select id="language" class="VS_SELECT"></select>
+    </div>
+    <div id="thisEditor"></div>
+    <div id="bottomDIV">
+        <div id="lineNumber">行 0</div>
+        <div id="column">列 0</div>
+        <div id="tab">tab:4</div>
+        <div id="items">
+            <!---->
+            <a>|</a>
+        </div>
+    </div>
+    <script>
+        function OpenFileInWindow(fileName) {
+            //
+        }
+        var items = ['method','value','constant','property','variable']
+        var item_definition = ['Command','Particle','Entities','Selector','ChildCommand']
+
+        for (var i = 0; i <items.length; i++) {
+            $('#items').append(`<div class="suggest-icon codicon codicon-symbol-${items[i]}"></div>`)
+            $('#items').append(`<a>${item_definition[i]}</a>`)
+        }
+        $('#file').click(function(){
+            OpenFileInWindow($('#file').text())
+        })
+        var ITextModel = monaco.editor.create(document.getElementById('thisEditor'), {
+            language: "plaintext",
+            theme: "vs-dark",
+            foldingStrategy: 'indentation', // 代码可分小段折叠
+            renderLineHighlight: 'all', // 行亮
+            selectOnLineNumbers: true, // 显示行号
+            readOnly: false, // 只读
+            fontSize: 16, // 字体大小
+            tabSize: 4, // tab 缩进长度
+            automaticLayout:true,
+            colorDecorators:true,
+            acceptSuggestionOnCommitCharacter: true, // 接受关于提交字符的建议
+            acceptSuggestionOnEnter: 'on', // 接受输入建议 "on" | "off" | "smart"
+            autoClosingBrackets: 'always', // 是否自动添加结束括号(包括中括号) "always" | "languageDefined" | "beforeWhitespace" | "never"
+            autoClosingDelete: 'always', // 是否自动删除结束括号(包括中括号) "always" | "never" | "auto"
+            autoClosingQuotes: 'always', // 是否自动添加结束的单引号 双引号 "always" | "languageDefined" | "beforeWhitespace" | "never"
+            autoIndent: 'None', // 控制编辑器在用户键入、粘贴、移动或缩进行时是否应自动调整缩进
+            contextmenu: true, // 启用上下文菜单
+            cursorSmoothCaretAnimation: false, // 是否启用光标平滑插入动画  当你在快速输入文字的时候 光标是直接平滑的移动还是直接"闪现"到当前文字所处位置
+            cursorStyle: 'UnderlineThin', // "Block"|"BlockOutline"|"Line"|"LineThin"|"Underline"|"UnderlineThin" 光标样式
+            folding: true, // 是否启用代码折叠
+            links: true, // 是否点击链接
+            roundedSelection: true, // 选区是否有圆角
+            mouseWheelZoom:true,
+            fontFamily: 'Menlo'
+            // theme: 'vs'// vs, hc-black, or vs-dark
+        });
+        ITextModel.onDidChangeCursorPosition((e) => {
+                // some codes here.
+                document.getElementById('lineNumber').innerHTML = '行 '+ITextModel.getPosition().lineNumber
+                document.getElementById('column').innerHTML = '列 ' + ITextModel.getPosition().column
+            });
+        function getElementStyle(obj, attr) {
+                if (obj.currentStyle) {
+                    return obj.currentStyle[attr]
+                } else {
+                    return getComputedStyle(obj, false)[attr]
+                }
+            }
+        function changeTheme(selectedValue) {
+            monaco.editor.setTheme(selectedValue)
+            if (selectedValue != 'Minecraft-Command-theme') {
+                let getStyle = document.getElementsByClassName('monaco-editor')[0]
+                let getBG = getElementStyle(getStyle,'background-color')
+                let getFG = getElementStyle(getStyle, 'color')
+                let getBORDER = getElementStyle(getStyle, 'border-color').slice(0,-1) + ', 0.2)'
+                let getOPT_BORDER = getElementStyle(getStyle, 'border-color').slice(0, -1) + ', 0.5)'
+                let SHADWO = getElementStyle(getStyle, 'border-color').slice(0, -1) + ', 0.1)'
+                //
+                console.log(getBG, getFG, getBORDER)
+                //set
+                document.body.style.setProperty('--SELECT_BORDER', getBORDER);
+                document.body.style.setProperty('--SELECT_BG', 'rgba(0, 127, 212,0.15)');
+                document.body.style.setProperty('--OPTION_WIDGET_BG', getBG);
+                document.body.style.setProperty('--OPTION_WIDGET_BORDER', getOPT_BORDER);
+                document.body.style.setProperty('--ALL_COLOR', getFG);
+                document.body.style.setProperty('--SHADOW_COLOR', SHADWO);
+                //
+                for(let SELECT_WIDGET = 0 ; SELECT_WIDGET < document.getElementsByClassName('VS_SELECT').length; SELECT_WIDGET ++) {
+                    //console.log(SELECT_WIDGET)
+                }
+            }
+            //
+        }
+        document.getElementById('theme').addEventListener('change', event => {
+                // 获取当前选中的选项的值
+                changeTheme(event.target.value)
+        });
+        //end
+        const selectedValue = 'vs-dark';
+        monaco.editor.setTheme(selectedValue)
+        //
+        let getStyle = document.getElementsByClassName('monaco-editor')[0]
+        let getBG = getElementStyle(getStyle, 'background-color')
+        let getFG = getElementStyle(getStyle, 'color')
+        let getBORDER = "rgba"+getElementStyle(getStyle, 'border-color').slice(3, -1) + ', 0.2)'
+        let getOPT_BORDER = "rgba" +getElementStyle(getStyle, 'border-color').slice(3, -1) + ', 0.5)'
+        let SHADWO = "rgba" +getElementStyle(getStyle, 'border-color').slice(3, -1) + ', 0.1)'
+
+        console.log(getBG, getFG, getBORDER)
+        //set
+        document.body.style.setProperty('--SELECT_BORDER', getBORDER);
+        document.body.style.setProperty('--SELECT_BG', 'rgba(0, 127, 212,0.15)');
+        document.body.style.setProperty('--OPTION_WIDGET_BG', getBG);
+        document.body.style.setProperty('--OPTION_WIDGET_BORDER', getOPT_BORDER);
+        document.body.style.setProperty('--ALL_COLOR', getFG);
+        document.body.style.setProperty('--SHADOW_COLOR', SHADWO);
+        //language
+
+        this_SELECT = document.getElementById('language')
+        var LANG_list = monaco.languages.getLanguages()
+        for (let i = 0; i < LANG_list.length; i++) {
+            $('#language').append(`<option>${LANG_list[i].id}</option>`)
+            
+        }
+        document.getElementById('language').addEventListener('change', event => {
+            monaco.editor.setModelLanguage(ITextModel.getModel(), event.target.value)
+            if(event.target.value == 'Minecraft-Command') {
+                monaco.editor.setTheme('Minecraft-Command-theme')
+            }
+        });
+        //交互部分
+        //start
+        var ThisFileName = 'untitled'
+        function setEitorText(text,name) {
+            var currentModel = ITextModel.getModel(); 
+            currentModel.setValue(text)
+            ThisFileName = name
+            $('#fileName').text(ThisFileName)
+        }
+        function postTextToPython() {
+            var currentModel = ITextModel.getModel();
+            return [ThisFileName,currentModel.getValue()]
+        }
+        function changeLanguage(language) {
+            if(LANG_list.indexOf(language) != -1) {
+                monaco.editor.setModelLanguage(ITextModel.getModel(), language)
+                document.getElementById('language').value = language
+            }
+        }
+    </script>
+    <!--spliter-->
+    <script>
+        $('#theme').append(`<option>Minecraft-Command-dark-theme</option>`)
+
+        // Minecraft Command Language
+        monaco.languages.register({ id: 'Minecraft-Command' });
+        var keywords = ['help', 'ability', 'advancement', 'alwaysday', 'attribute',
+        'ban', 'ban-ip', 'banlist', 'bossbar', 'camerashake', 'changesetting', 'clear',
+        'clearspawnpoint', 'clone', 'connect', 'damage', 'data', 'datapack', 'daylock',
+        'debug', 'dedicatedwsserver', 'defaultgamemode', 'deop', 'dialogue', 'difficulty',
+        'effect', 'enchant', 'event', 'execute', 'experience', 'fill', 'fillbiome', 'fog',
+        'forceload', 'function', 'gamemode', 'gamerule', 'gametest', 'give', 'help', 'immutableworld',
+        'inputpermission', 'item', 'jfr', 'kick', 'kill', 'list', 'locate', 'loot', 'me', 'mobevent',
+        'msg', 'music', 'op', 'ops', 'pardon', 'pardon-ip', 'particle', 'perf', 'permission',
+        'place', 'playanimation', 'playsound', 'publish', 'recipe', 'reload', 'remove',
+        'replaceitem', 'ride', 'save', 'save-all', 'save-off', 'save-on', 'say', 'schedule',
+        'scoreboard', 'script', 'scriptevent', 'seed', 'setblock', 'setidletimeout',
+        'setmaxplayers', 'setworldspawn', 'spawnpoint', 'spectate', 'spreadplayers', 'stop',
+        'stopsound', 'structure', 'summon', 'tag', 'team', 'teammsg', 'teleport', 
+        'tell', 'tellraw', 'testfor', 'testforblock', 'testforblocks', 'tickingarea', 
+        'time', 'title', 'titleraw', 'tm', 'toggledownfall', 'tp', 'trigger', 'volumearea',
+        'w', 'wb', 'weather', 'whitelist', 'worldborder', 'worldbuilder', 'wsserver', 'xp',
+        'attack', 'collect', 'createagent', 'destroy', 'detectredstone', 'detect', 'dropall', 'drop'
+        ,'getitemcount', 'getitemdetail', 'getitemspace', 'inspectdata', 'inspect', 'move',
+        'place', 'till', 'tpagent', 'transfer', 'turn']
+
+        var Target = ['@p','@r','@a','@e','@s','@c','@v','@initiator']
+
+        var Selector = ['x','y','z','distance','r','rm','dx','dy','dz','scores','tag','team','name',
+        'type','family','predicat','x_rotation','rx','rxm','y_rotation','ry','rym','nbt','hasitem',
+        'level','l','lm','gamemode','m','advancements','haspermission','limit','sort','c']
+
+        var _Entities_ = [ 'empty', 'flowing_lava', 'flowing_water', 'lava', 'water', 'axolotl', 'bat', 'bee',
+        'blaze', 'camel', 'cat', 'cave_spider', 'chicken', 'cod', 'cow', 'creeper', 'dolphin', 'donkey', 'drowned',
+        'elder_guardian', 'ender_dragon', 'enderman', 'endermite', 'evoker', 'fox', 'ghast', 'giant', 'glow_squid',
+        'goat', 'guardian', 'hoglin', 'horse', 'husk', 'illusioner', 'iron_golem', 'llama', 'magma_cube', 'mooshroom',
+        'mule', 'ocelot', 'panda', 'parrot', 'phantom', 'pig', 'piglin', 'piglin_brute', 'pillager', 'polar_bear',
+        'pufferfish', 'rabbit', 'ravager', 'salmon', 'sheep', 'shulker', 'silverfish', 'sniffer', 'skeleton',
+        'skeleton_horse', 'slime', 'snow_golem', 'spider', 'squid', 'stray', 'strider', 'trader_llama', 'tropical_fish',
+        'turtle', 'vex', 'villager', 'vindicator', 'wandering_trader', 'witch', 'wither', 'wither_skeleton', 'wolf',
+        'zoglin', 'zombie', 'zombie_horse', 'zombie_villager', 'zombified_piglin', 'allay', 'frog', 'tadpole', 'warden',
+        'area_effect_cloud', 'armor_stand', 'end_crystal', 'evoker_fangs', 'fishing_bobber', 'item_frame',
+        'leash_knot', 'lightning_bolt', 'marker', 'interaction', 'block_display', 'entity_display', 'item_display',
+        'painting', 'arrow', 'dragon_fireball', 'egg', 'ender_pearl', 'experience_bottle', 'eye_of_ender',
+        'fireball', 'firework_rocket', 'llama_spit', 'potion', 'shulker_bullet', 'small_fireball', 'snowball',
+        'spectral_arrow', 'trident', 'wither_skull', 'boat', 'chest_boat', 'chest_minecart',
+        'command_block_minecart', 'furnace_minecart', 'hopper_minecart', 'minecart', 'spawner_minecart',
+        'tnt_minecart', 'falling_block falling_block', 'tnt', 'experience_orb', 'item',]//129
+
+        var Particle = ['ambient_entity_effect', 'mobspell_emitter', 'angry_villager',
+        'villager_angry', 'angry_villager', 'ash', 'block', 'breaking_item_icon',
+        'blockdust', 'Breaking', 'block_marker', 'bubble', 'bubble_column_up', 
+        'bubble_column_up_particle', 'bubble_pop', 'campfire_cosy_smoke', 'campfire_smoke_particle',
+        'campfire_signal_smoke', 'campfire_tall_smoke_particle', 'cherry_leaves',
+        'cherry_leaves_particle', 'cloud', 'water_evaporation_bucket_emitter', 
+        'composter', 'crop_growth_emitter', 'crimson_spore', 'conduit_particle', 
+        'crit', 'critical_hit_emitter', 'current_down', 'bubble_column_down_particle',
+        'damage_indicator',  'dolphin', 'dolphin_move_particle', 'dragon_breath', 
+        'dragon_breath_trail', 'dragon_breath',  'dripping_dripstone_lava',
+        'dripping_dripstone_water', 'dripping_honey', 'dripping_lava', 'lava_drip_particle',
+        'dripping_obsidian_tear', 'dripping_water', 'water_drip_particle', 'dust', 
+        'redstone_wire_dust_particle', 'dust_color_transition', 'sculk_sensor_redstone_particle',
+        'effect', 'splash_spell_emitter', 'elder_guardian', 'electric_spark', 
+        'electric_spark_particle', 'enchant', 'enchanting_table_particle', 'enchanted_hit', 
+        'end_rod', 'endrod', 'end_rod', 'balloon_gas_particle', 
+        'entity_effect', 'evoker_spell', 'explosion', 'large_explosion', 'explosion_emitter',
+        'huge_explosion_emitter', 'falling_dripstone_lava', 'falling_dripstone_water',
+        'falling_dust', 'falling_dust_red_sand_particle,', 'falling_honey', 
+        'honey_drip_particle', 'falling_lava', 'lava_drip_particle', 'falling_nectar', 
+        'nectar_drip_particle', 'falling_obsidian_tear', 'obsidian_tear_particle',
+        'falling_spore_blossom', 'spore_blossom_shower_particle', 'falling_water', 'water_splash_particle'
+        , 'firework', 'sparkler_emitter', 'fishing', 'water_wake_particle', 'flame', 'basic_flame_particle'
+        , 'flash', 'flash', 'glow', 'glow_squid_ink', 'happy_villager', 'villager_happy', 'heart',
+        'heart_particle', 'instant_effect', 'mobspell_emitter', 'item', 'breaking_item_icon', 'item_slime',
+        'item_snowball', 'landing_honey', 'landing_lava', 'landing_obsidian_tear', 'large_smoke',
+        'water_evaporation_actor_emitter', 'lava', 'lava_particle', 'mobflame_emitter,', 'mycelium',
+        'mycelium_dust_particle', 'nautilus', 'conduit_particle', 'note', 'note_particle', 'poof',
+        'explode', 'portal', 'mob_portal', 'rain', 'rainsplash', 'scrape', 'sculk_charge',
+        'sculk_charge_particle', 'sculk_charge_pop', 'sculk_charge_pop_particle', 'sculk_soul',
+        'sculk_soul_particle', 'shriek', 'shriek_particle', 'smoke', 'basic_smoke_particle',
+        'sneeze', 'snowflake', 'snowflake_particle', 'sonic_boom', 'sonic_explosion', 'soul',
+        'soul_particle', 'soul_fire_flame', 'blue_flame_particle', 'spit', 'spore_blossom_air',
+        'spore_blossom_ambient_particle', 'splash', 'watersplash', 'squid_ink', 'ink',
+        'sweep_attack', 'terrain', 'totem_of_undying', 'totem_particle', 'trackingemitter',
+        'underwater', 'vibration', 'vibration_signal', 'warped_spore', 'wax_off',
+        'wax_on', 'white_ash', 'witch', 'witchspell']
+
+        var moreCommands = ['align', 'anchored',  'at', 'facing',  'on',
+          'as', 'over',   'if', 'unless', 'biome', 
+           'data',    'dimension', 'loaded',
+           'predicate',  'store',  'bossbar',
+              'storage',   'at', 
+             'entity ', 'in', 'positioned',  'rotated',  'block' , 'blocks', 
+              'score', 'matches', 'run','add','list','modify','remove','setdisplay','rendertype','displayname',
+            'players','enable','get','operation','reset','set','objectives','dummy','belowname','random','test']
+        ////////////////////////////////////////////////////////////////
+        var Entities = []
+        for (var i = 0; i < _Entities_.length; i++) {
+            Entities.push('minecraft:'+_Entities_[i])
+        }
+        var operator = ['\\+','\\-','\\*','\\/','\\%','\\==','\\<=','\\>=','\\<','\\>','\\!=','\\+=','\\-=','\\*=','\\/=','\\%=','\\><'];
+        //Minecraft-Command
+        //make regexp for keywords
+        function makeReg(list) {
+            let thisKeywords = ""
+            for (let i = 0; i < list.length; i++) {
+                thisKeywords = thisKeywords + list[i] + '|'
+            }
+            thisKeywords = thisKeywords.slice(0,-1)
+            return thisKeywords
+            //
+        }
+        var reg = new RegExp(`\\b(${makeReg(keywords)})\\b`);
+        //
+        var entites_reg = new RegExp(`\\b(${makeReg(_Entities_)})\\b`);
+        //
+        var more_reg = new RegExp(`\\b(${makeReg(moreCommands)})\\b`);
+        //
+        var select_reg = new RegExp(`\\b(${makeReg(Selector)})\\b`);
+        //
+        var operation_reg = new RegExp(`(${makeReg(operator)})`);
+        //
+        monaco.languages.setMonarchTokensProvider("Minecraft-Command", {
+
+            tokenizer: {
+                root: [
+                    [/[{}()\[\]]/, '@brackets'],
+
+                    [/\b\d*\.\d+([eE][\-+]?\d+)?\b/, "number.float"],
+                    [/\b0[xX][0-9a-fA-F]+\b/, "number.hex"],
+                    [/\b\d+\b/, "number"],
+
+                    [reg, "my-keyword"],
+
+                    [entites_reg, "my-entites"],
+                    [/([a-zA-Z0-9_]+)\s*(\(.*\))/, "@rematch", "@matchfunc"],
+                    [more_reg,  "my-more"],
+                    [select_reg,'my-select'],
+                    [operation_reg,'my_op'],
+                    [/'([^'\\]|\\.)*$/, "string.invalid"],
+                    [/'/, { token: "string.quote", bracket: "@open", next: "@string" }],
+                    { include: "@whitespace" },
+                ],
+                matchfunc: [
+                    [/([a-zA-Z0-9_]+)/, { token: "my-function", next: "@popall"}],
+                ],
+                string: [
+                    [/[^\\'']+/, "string"],
+                    [/\\./, "string.escape.invalid"],
+                    [/'/, { token: "string.quote", bracket: "@close", next: "@pop" }],
+                ],
+                comment: [
+                    [/#.*$/, "comment"]
+                ],
+                whitespace: [
+                    [/[ \t\r\n]+/, "white"],
+                    [/#.*$/, "comment"],
+                ],
+
+            },
+            //语言大小写不敏感吗
+            ignoreCase: true,
+        });
+        monaco.editor.defineTheme("Minecraft-Command-dark-theme", {
+                //基础
+                base: "vs-dark",
+                //继承
+                inherit: true,
+                //规则
+                rules: [
+                    { token: "my-keyword", foreground: "75B9E2", fontStyle: 'bold' },
+                    { token: "my-more", foreground: "FFA500" ,fontStyle:'italic'},
+                    { token: "my-entites", foreground: "008800" ,fontWeight:"light" },
+                    { token: "my-select", foreground: "C695C6",fontStyle:'italic' },
+                    { token: "my_op", foreground: "FFA500"},
+                    { token: "@operators", foreground: "FFA500"},
+                ],
+                colors: {
+                // 相关颜色属性配置
+                'editor.foreground': '#ffffff',
+                //'editor.background': '#3e414a',     //背景色
+                'editorCursor.foreground': '#999999',
+                //'editor.lineHighlightBackground': '#0000FF20',
+                //'editorLineNumber.foreground': '#008800',
+                //'editor.selectionBackground': '#88000030',
+                //'editor.inactiveSelectionBackground': '#88000015'
+            }
+        });
+        monaco.editor.defineTheme("Minecraft-Command-light-theme", {
+                //基础
+                base: "vs",
+                //继承
+                inherit: true,
+                //规则
+                rules: [
+                    { token: "my-keyword", foreground: "75B9E2", fontStyle: 'bold' },
+                    { token: "my-more", foreground: "FFA500" ,fontStyle:'italic'},
+                    { token: "my-entites", foreground: "008800" ,fontWeight:"light" },
+                    { token: "my-select", foreground: "C695C6",fontStyle:'italic' },
+                    { token: "my_op", foreground: "FFA500"},
+                    { token: "@operators", foreground: "FFA500"},
+                ],
+                colors: {
+                // 相关颜色属性配置
+                'editor.foreground': '#111111',
+                //'editor.background': '#3e414a',     //背景色
+                'editorCursor.foreground': '#999999',
+                //'editor.lineHighlightBackground': '#0000FF20',
+                //'editorLineNumber.foreground': '#008800',
+                //'editor.selectionBackground': '#88000030',
+                //'editor.inactiveSelectionBackground': '#88000015'
+            }
+        });
+        monaco.languages.setLanguageConfiguration("Minecraft-Command", {
+                brackets: [
+                    ["{", "}"],
+                    ["[", "]"],
+                    ["(", ")"],
+                ],
+                autoClosingPairs: [
+                    { open: "{", close: "}" },
+                    { open: "[", close: "]" },
+                    { open: "(", close: ")" },
+                    { open: '"', close: '"', notIn: ["string"] },
+                    { open: "'", close: "'", notIn: ["string", "comment"] },
+                    { open: "`", close: "`", notIn: ["string", "comment"] },
+                    { open: "/**", close: " */", notIn: ["string"] },
+                ],
+            });
+
+        monaco.languages.registerCompletionItemProvider('Minecraft-Command', {
+            provideCompletionItems: (model, position) => {
+                const suggestions = [
+                    ...keywords.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Method,
+                            insertText: k,
+                        };
+                    })
+                ,
+                    ...Particle.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Value,
+                            insertText: k,
+                        };
+                    })
+                ,
+                    ...Entities.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Constant
+,
+                            insertText: k,
+                        };
+                    })
+                ,
+                    ..._Entities_.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Constant
+                            ,
+                            insertText: k,
+                        };
+                    })
+                ,
+                    ...Selector.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Property,
+                            insertText: k,
+                        };
+                    })
+                ,
+                    ...Target.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Property,
+                            insertText: k,
+                        };
+                    })
+                ,
+                    ...moreCommands.map(k => {
+                        return {
+                            label: k,
+                            kind: monaco.languages.CompletionItemKind.Variable,
+                            insertText: k,
+                        };
+                    })
+                ];
+                return { suggestions: suggestions };
+            }
+        });
+        //Minecraft-Command-theme
+        monaco.editor.setModelLanguage(ITextModel.getModel(), 'Minecraft-Command')
+        
+        $('#language').append(`<option>Minecraft-Command</option>`)
+        //append
+        $('#theme').append(`<option>Minecraft-Command-light-theme</option>`)
+
+        $('#language').val('Minecraft-Command')
+        $('#theme').val('Minecraft-Command-light-theme')
+        //monaco.editor.setTheme('Minecraft-Command-light-theme')
+        changeTheme('Minecraft-Command-light-theme')
+    </script>
+</body>
+</html>
