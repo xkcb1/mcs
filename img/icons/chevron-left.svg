@@ -4,7 +4,11 @@
   height="24"
   viewBox="0 0 24 24"
   fill="none"
+<<<<<<< HEAD
   stroke="gray"
+=======
+  stroke="currentColor"
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"

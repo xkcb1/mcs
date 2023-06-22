@@ -36,9 +36,15 @@ class NewProjectWindow(QMainWindow):#继承Qwidget
         #self.setGeometry(300, 300, 250, 150)
         # #(x, y, w, h)       
         self.setWindowTitle('新建项目 (new project) - '+self.User)#bg
+<<<<<<< HEAD
         self.MainWidget = QWidget(self)
         self.MainWidget.move(0,0)
         self.MainWidget.resize(self.W,self.H)
+=======
+        self.MainWidget = QWidget(self.widget_2)
+        self.MainWidget.move(0,0)
+        self.MainWidget.resize(self.W - 16 - 14,self.H - 46)
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         self.MainWidget.setObjectName('MainWidget')
         #bg END
         self.leftDiv = QFrame(self.MainWidget)#leftDiv
@@ -55,8 +61,13 @@ class NewProjectWindow(QMainWindow):#继承Qwidget
         self._RightUI_()
         #END
         self.bottomDiv = QFrame(self.MainWidget)#bottomDiv
+<<<<<<< HEAD
         self.bottomDiv.move(0,self.MainWidget.height() - 34)
         self.bottomDiv.resize(self.W,34)
+=======
+        self.bottomDiv.move(0,self.MainWidget.height() - 52)
+        self.bottomDiv.resize(self.W - 16 - 18,34)
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         self.bottomDiv.setObjectName('bottomDiv')
         self._BottomUI_()
         #use newProject.qss theme
@@ -341,7 +352,11 @@ class NewProjectWindow(QMainWindow):#继承Qwidget
         self.editor.W = settings['w']
         self.editor.H = settings['h']
         self.editor.resize(self.editor.W,self.editor.H)
+<<<<<<< HEAD
         self.editor.setWindowTitle(f"MC studio ({self.editor.User}) - {settings['name']}")#title
+=======
+        self.editor.label_2.setText(f"MC studio ({self.editor.User}) - {settings['name']}")#title
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         self.editor.show()
         #sys.exit(app2.exec_())
     def RadioIFUSE(self):

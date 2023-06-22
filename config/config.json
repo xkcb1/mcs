@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {'IfUseMorePackage': False, 'IfUseMoreCompiler': False, 'IfSaveAsProjectAuto': False, 'name': 'test project', 'path': 'C:/Users/Administrator/Desktop', 'type': 1, 'info': '', 'w': 1254, 'h': 832, 'x': 415, 'y': 243}
+=======
+{'IfUseMorePackage': True, 'IfUseMoreCompiler': True, 'IfSaveAsProjectAuto': False, 'name': 'testPack', 'path': 'C:/Users/LENOVO/Desktop', 'type': 1, 'info': '', 'w': 1095, 'h': 822, 'x': 21, 'y': 47}
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396

@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 # 每个module要求实现一个init(parent,Name,self)函数，来获取此次初始化
 import os
 import sys
+=======
+#每个module要求实现一个init(parent,Name,self)函数，来获取此次初始化
+import os,sys
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 import PyQt5.QtGui
 from PyQt5 import QtCore
 from PyQt5.QtGui import *
@@ -9,6 +14,7 @@ import PyQt5.QtWidgets as QtWidgets
 from PyQt5.QtCore import *
 from lib.readConfig import readConfig
 from lib.StyleReader import StyleReader
+<<<<<<< HEAD
 # import base functions
 from lib.base import *
 # more lib
@@ -66,3 +72,13 @@ def addNodeEditor(name):
     # create graphics view
     view = QDMGraphicsView(grScene)
     This_layout.addWidget(view)
+=======
+#import base functions
+from lib.base import *
+#end
+def init(parent,Name,self):
+    globals()['SELF'] = self
+    ThisWidget = QWidget()
+    parent.addWidget(ThisWidget)
+    
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396

@@ -1,13 +1,21 @@
 #From (Pure NbtRender Core) v0.01
 #Use obj file
+<<<<<<< HEAD
 #NBT file : C:/Users/Administrator/Desktop/mcs_new/test/nbt/badlands_miner_outpost_event_1.nbt
+=======
+#NBT file : C:/Users/LENOVO/Desktop/mcs/test/nbt/badlands_miner_outpost_event_1.nbt
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 #NBT file size : 1.4013671875 kb
 #Structure size :5,5,7
 #Blocks count : 50
 #Air count : 90
+<<<<<<< HEAD
 mtllib badlands_miner_outpost_event_1.mtl
 o badlands_miner_outpost_event_1
 #V
+=======
+o badlands_miner_outpost_event_1
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 v 1 1 2
 v 2 1 2
 v 1 1 3
@@ -376,7 +384,10 @@ v 0 2 3
 v 1 2 3
 v 0 2 4
 v 1 2 4
+<<<<<<< HEAD
 #F
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 f 1 5 6 2
 f 1 3 4 2
 f 1 3 7 5

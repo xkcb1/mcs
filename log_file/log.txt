@@ -1,0 +1,83 @@
+Already running the application in Python 3.11.2 (tags/v3.11.2:878ead1, Feb  7 2023, 16:38:35) [MSC v.1934 64 bit (AMD64)]
+Asset <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_0
+import lib.core.module.Asset successful
+Info <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_1
+import lib.core.module.Info successful
+[info] : successful started<Start> 22:27:36 
+
+Editor <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_2
+init -> Editor
+import lib.core.module.Editor successful
+Resource <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_3
+init -> Resource
+import lib.core.module.Resource successful
+Attribute <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_4
+toSmall
+toSmall
+import lib.core.module.Attribute successful
+[info] : successful started<Editor> 22:27:36 
+
+Resource <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_5
+init -> Resource
+import lib.core.module.Resource successful
+ItemList <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_6
+import lib.core.module.ItemList successful
+Model <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_7
+import lib.core.module.Model successful
+Asset <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_8
+import lib.core.module.Asset successful
+[info] : successful started<Model> 22:27:36 
+
+Resource <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_9
+init -> Resource
+import lib.core.module.Resource successful
+Builtin <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_10
+import lib.core.module.Builtin successful
+Attribute <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_11
+toSmall
+toSmall
+import lib.core.module.Attribute successful
+Node <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_12
+import lib.core.module.Node successful
+[info] : successful started<Node> 22:27:36 
+
+NbtViewer <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_13
+import lib.core.module.NbtViewer successful
+Asset <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_14
+import lib.core.module.Asset successful
+HexEditor <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_15
+import lib.core.module.HexEditor successful
+[info] : successful started<Nbt> 22:27:36 
+
+Terminal <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_16
+start at:widget->Terminalindex-> 0
+start at:widget->Terminalindex-> 2
+import lib.core.module.Terminal successful
+Resource <Main.NewEditor object at 0x00000173AC1771C0>
+new : _Layout_17
+init -> Resource
+import lib.core.module.Resource successful
+[info] : successful started<Terminal> 22:27:37 
+
+<Main.NewEditor object at 0x00000173AC1771C0>
+openNbtfile: ('C:/Users/LENOVO/Desktop/mcs/test/nbt/city_center_1.nbt', 'All Files (*)')
+1754 127 852 633
+750 852
+PyQt5.QtCore.QRect(235, 143, 887, 661)

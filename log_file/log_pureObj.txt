@@ -1,0 +1,502 @@
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+obj file
+#From (Pure NbtRender Core) v0.01
+#Use obj file
+#NBT file : ./test/nbt/aa.nbt
+#NBT file size : 0.44921875 kb
+#Structure size :5,5,5
+#Blocks count : 125
+#Air count : 0
+
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+obj file:
+#From (Pure NbtRender Core) v0.01
+#Use obj file
+#NBT file : ./test/nbt/aa.nbt
+#NBT file size : 0.44921875 kb
+#Structure size :5,5,5
+#Blocks count : 125
+#Air count : 0
+o aa.nbt.obj
+
+7
+6
+6
+6
+7
+6
+4
+4
+4
+6
+6
+4
+4
+4
+6
+6
+4
+4
+4
+6
+7
+6
+6
+6
+7
+6
+4
+4
+4
+6
+4
+4
+4
+4
+4
+4
+6
+4
+4
+4
+6
+6
+4
+4
+4
+6
+4
+4
+4
+4
+4
+4
+6
+4
+4
+4
+6
+6
+4
+4
+4
+6
+4
+4
+4
+4
+4
+4
+6
+4
+4
+4
+6
+7
+6
+6
+6
+7
+6
+4
+4
+4
+6
+6
+4
+4
+4
+6
+6
+4
+4
+4
+6
+7
+6
+6
+6
+7
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+obj file:
+#From (Pure NbtRender Core) v0.01
+#Use obj file
+#NBT file : ./test/nbt/aa.nbt
+#NBT file size : 0.44921875 kb
+#Structure size :5,5,5
+#Blocks count : 125
+#Air count : 0
+o aa.nbt.obj
+
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 3513
+new 3104
+ <1> -Optimization rate [88.35752917734129%]
+DELe duplicate points
+old 24832
+new 6768
+ <2> -Optimization rate [27.255154639175256%]
+Internal elimination of points
+old 6768
+new 5163
+ <3> -Optimization rate [76.2854609929078%]
+old total points :  182176
+new total points :  5163
+ <Total> -Optimization rate [2.834072545230985%]
+Block internal culling
+old 3513
+new 3104
+ <1> -Optimization rate [88.35752917734129%]
+DELe duplicate points
+old 24832
+new 6768
+ <2> -Optimization rate [27.255154639175256%]
+Internal elimination of points
+old 6768
+new 5163
+ <3> -Optimization rate [76.2854609929078%]
+old total points :  182176
+new total points :  5163
+ <Total> -Optimization rate [2.834072545230985%]
+Block internal culling
+old 3513
+new 3104
+ <1> -Optimization rate [88.35752917734129%]
+DELe duplicate points
+old 24832
+new 6768
+ <2> -Optimization rate [27.255154639175256%]
+Internal elimination of points
+old 6768
+new 5163
+ <3> -Optimization rate [76.2854609929078%]
+old total points :  182176
+new total points :  5163
+ <Total> -Optimization rate [2.834072545230985%]
+Block internal culling
+old 3513
+new 3104
+ <1> -Optimization rate [88.35752917734129%]
+DELe duplicate points
+old 24832
+new 6768
+ <2> -Optimization rate [27.255154639175256%]
+Internal elimination of points
+old 6768
+new 5163
+ <3> -Optimization rate [76.2854609929078%]
+old total points :  182176
+new total points :  5163
+ <Total> -Optimization rate [2.834072545230985%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 152
+ <3> -Optimization rate [73.07692307692307%]
+old total points :  1000
+new total points :  152
+ <Total> -Optimization rate [15.2%]
+Block internal culling
+old 3513
+new 3104
+ <1> -Optimization rate [88.35752917734129%]
+DELe duplicate points
+old 24832
+new 6768
+ <2> -Optimization rate [27.255154639175256%]
+Internal elimination of points
+old 6768
+new 5163
+ <3> -Optimization rate [76.2854609929078%]
+old total points :  182176
+new total points :  5163
+ <Total> -Optimization rate [2.834072545230985%]
+Block internal culling
+old 125
+new 98
+ <1> -Optimization rate [78.4%]
+DELe duplicate points
+old 784
+new 208
+ <2> -Optimization rate [26.53061224489796%]
+Internal elimination of points
+old 208
+new 208
+ <3> -Optimization rate [100.0%]
+old total points :  1000
+new total points :  208
+ <Total> -Optimization rate [20.8%]
+Block internal culling
+old 3513
+new 3104
+ <1> -Optimization rate [88.35752917734129%]
+DELe duplicate points
+old 24832
+new 6768
+ <2> -Optimization rate [27.255154639175256%]
+Internal elimination of points
+old 6768
+new 5966
+ <3> -Optimization rate [88.15011820330969%]
+old total points :  182176
+new total points :  5966
+ <Total> -Optimization rate [3.2748550851923417%]

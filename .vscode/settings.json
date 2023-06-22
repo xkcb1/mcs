@@ -1,5 +1,8 @@
 {
+<<<<<<< HEAD
     "workbench.editorAssociations": {
         "*.obj": "babylonjs.assetDigest"
     }
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 }

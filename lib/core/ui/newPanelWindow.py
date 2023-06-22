@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 import sys
 from PyQt5.QtCore import Qt, QPoint, QSize
+<<<<<<< HEAD
 from PyQt5.QtGui import QFont, QEnterEvent, QPixmap, QColor, QIcon
+=======
+from PyQt5.QtGui import QFont, QEnterEvent, QPixmap, QColor
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, QDialog, QGraphicsDropShadowEffect
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
@@ -19,6 +23,10 @@ class PanelWindow(QWidget, Ui_Form):
         self.IfCanResize = True
         self.setMouseTracking(True)  # 设置widget鼠标跟踪
         # print(self.width(),self.height())
+<<<<<<< HEAD
+=======
+        self.my_Qss()  # 美化
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         self.widget.installEventFilter(self)  # 初始化事件过滤器
         self.widget_2.installEventFilter(self)
         self.widget_2.setStyleSheet('''#widget_2{border-bottom-left-radius: 7px;
@@ -29,6 +37,7 @@ class PanelWindow(QWidget, Ui_Form):
         self.shadow.setColor(QColor(0, 0, 0))
         self.shadow.setOffset(0, 0)
         self.label_2.deleteLater()
+<<<<<<< HEAD
         #
         self.setWindowIcon(QIcon(r"./img/appicon/icon32.png"))
         #
@@ -36,6 +45,10 @@ class PanelWindow(QWidget, Ui_Form):
         self.widget.setStyleSheet('''border:0px;''')
         self.UseQss()
 
+=======
+        self.THIS_Widget.setGraphicsEffect(self.shadow)
+        self.widget.setStyleSheet('''border:0px;''')
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     def _init_main_window(self):
         # 设置窗体无边框
         self.setWindowFlags(Qt.FramelessWindowHint)
@@ -45,10 +58,16 @@ class PanelWindow(QWidget, Ui_Form):
         h = self.label.height()
         # 注意修改Windows路径问题
         self.pix = QPixmap(
+<<<<<<< HEAD
             r"./img/appicon/icon32.png")
         self.label.setPixmap(self.pix)
         self.label.setScaledContents(True)
 
+=======
+            r"./img/appicon/icon32_white.png")
+        self.label.setPixmap(self.pix)
+        self.label.setScaledContents(True)
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     def _initDrag(self):
         # 设置鼠标跟踪判断扳机默认值
         self._move_drag = False
@@ -182,6 +201,7 @@ class PanelWindow(QWidget, Ui_Form):
         self._bottom_drag = False
         self._right_drag = False
 
+<<<<<<< HEAD
     def UseQss(self):
         self.setStyleSheet('''
 #pushButton {
@@ -219,3 +239,11 @@ class PanelWindow(QWidget, Ui_Form):
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 ''')
+=======
+    def my_Qss(self):
+        # Qss美化
+        from lib.StyleReader import StyleReader
+        styleFile = './style/main.qss'
+        qssStyle = StyleReader.readQSS(styleFile)
+        self.setStyleSheet(qssStyle)
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396

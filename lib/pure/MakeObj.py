@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import nbtlib
 import os
 import shutil
@@ -10,6 +11,13 @@ def Xprint(*argv):
     pass
 
 
+=======
+import nbtlib, os, sys, numpy
+from time import process_time
+
+def Xprint(*argv):
+    pass
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 ThisName = ''
 log = print
 is_open_now = False
@@ -23,6 +31,7 @@ if len(sys.argv) > 2:
         is_open_now = True
 process_time()
 
+<<<<<<< HEAD
 BLOCK_texture = []
 texture_size = 1024
 
@@ -30,11 +39,18 @@ texture_size = 1024
 def MakeStlFileByNbt(NbtFIlePath: str, name='', is_open_now=False):
     NbtFIleName = NbtFIlePath.split('/')[-1].split('.')[0]
     outName = NbtFIleName
+=======
+def MakeStlFileByNbt(NbtFIlePath: str,name='',is_open_now=False):
+    NbtFIleName = NbtFIlePath.split('/')[-1].split('.')[0]
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     if name == '':
         ObjFilePath = f'./obj/{NbtFIleName}.obj'
     else:
         ObjFilePath = f'./obj/{name}.obj'
+<<<<<<< HEAD
         outName = name
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     Nbt_File = nbtlib.load(NbtFIlePath)
     Nbt_Block = Nbt_File['blocks']
     Nbt_getAirState = -1
@@ -52,7 +68,10 @@ def MakeStlFileByNbt(NbtFIlePath: str, name='', is_open_now=False):
 #Structure size :{str(int(Nbt_File['size'][0]))},{str(int(Nbt_File['size'][1]))},{str(int(Nbt_File['size'][2]))}
 #Blocks count : {str(len(Numpy_BlockList))}
 #Air count : {str(len(Nbt_Block) - len(Numpy_BlockList))}
+<<<<<<< HEAD
 mtllib {outName}.mtl
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 o {NbtFIleName.split('.')[0]}
 '''
     # 内部剔除
@@ -66,8 +85,13 @@ o {NbtFIleName.split('.')[0]}
         y = int(block[1])
         z = int(block[2])
         if (x, y + 1, z) in Numpy_BlockList and (x, y - 1, z) in Numpy_BlockList and (
+<<<<<<< HEAD
                 x + 1, y, z) in Numpy_BlockList and (x - 1, y, z) in Numpy_BlockList and (x, y, z + 1) in Numpy_BlockList and (
                 x, y, z - 1) in Numpy_BlockList:
+=======
+        x + 1, y, z) in Numpy_BlockList and (x - 1, y, z) in Numpy_BlockList and (x, y, z + 1) in Numpy_BlockList and (
+        x, y, z - 1) in Numpy_BlockList:
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
             BLOCK_DEL_list.append(block)
             # 如果一个方块的所有面上都有方块，则删去这个方块
     for block in BLOCK_DEL_list:
@@ -75,8 +99,12 @@ o {NbtFIleName.split('.')[0]}
     Numpy_BlockList = numpy.array(Numpy_BlockList)
     new_block_len = len(Numpy_BlockList)
     print('new', new_block_len)
+<<<<<<< HEAD
     print(
         f' <1> -Optimization rate [{str(new_block_len / old_block_len * 100)}%]')
+=======
+    print(f' <1> -Optimization rate [{str(new_block_len / old_block_len * 100)}%]')
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     # Numpy_BlockList -> numpy.array( [(x,y,z) ,(x1,y1,z1) . . .] )
 
     Obj_Point_Pos = []
@@ -113,8 +141,12 @@ o {NbtFIleName.split('.')[0]}
     Obj_Point_Pos = list(set(Obj_Point_Pos))
     new_point_len = len(Obj_Point_Pos)
     print('new', new_point_len)
+<<<<<<< HEAD
     print(
         f' <2> -Optimization rate [{str(new_point_len / old_point_len * 100)}%]')
+=======
+    print(f' <2> -Optimization rate [{str(new_point_len / old_point_len * 100)}%]')
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     # 点的外层剔除
     print('Internal elimination of points')
     old_point_cen_len = len(Obj_Point_Pos)
@@ -126,17 +158,27 @@ o {NbtFIleName.split('.')[0]}
         z = int(point[2])
         if (x, y, z) in BLOCK_All and (x - 1, y, z) in BLOCK_All and (x - 1, y, z - 1) in BLOCK_All and (x, y,
                                                                                                          z - 1) in BLOCK_All and (
+<<<<<<< HEAD
                 x, y - 1, z) in BLOCK_All and (x - 1, y - 1, z) in BLOCK_All and (x - 1, y - 1,
                                                                                   z - 1) in BLOCK_All and (
                 x, y - 1, z - 1) in BLOCK_All:
+=======
+        x, y - 1, z) in BLOCK_All and (x - 1, y - 1, z) in BLOCK_All and (x - 1, y - 1,
+                                                                          z - 1) in BLOCK_All and (
+        x, y - 1, z - 1) in BLOCK_All:
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
             POINT_DEL_List.append(point)
             # 如果一个点的2x2x2内都是方块，则这个点可以被剔除
     for point in POINT_DEL_List:
         Obj_Point_Pos.remove(point)
     new_point_cen_len = len(Obj_Point_Pos)
     print('new', new_point_cen_len)
+<<<<<<< HEAD
     print(
         f' <3> -Optimization rate [{str(new_point_cen_len / old_point_cen_len * 100)}%]')
+=======
+    print(f' <3> -Optimization rate [{str(new_point_cen_len / old_point_cen_len * 100)}%]')
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     # total
     old_total = len(Nbt_Block) * 8
     new_total = len(Obj_Point_Pos)
@@ -145,6 +187,7 @@ o {NbtFIleName.split('.')[0]}
     print(f' <Total> -Optimization rate [{str(new_total / old_total * 100)}%]')
     # make obj file here
     # 创建4种类型
+<<<<<<< HEAD
     OBJ_V = '#V\n'
     OBJ_VT = '''#VT
 vt 0 0
@@ -161,6 +204,12 @@ vn 0 -0 1
 vn 0 -1 0'''
     OBJ_F = '#F\n'
     faceList = []
+=======
+    OBJ_V = ''
+    OBJ_VT = ''
+    OBJ_VN = ''
+    OBJ_F = ''
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     V_countLine = 0
     for block in Numpy_BlockList:
         x = int(block[0])
@@ -188,10 +237,16 @@ vn 0 -1 0'''
                 addLines += 1
         # 生成面
         can_see_face = []
+<<<<<<< HEAD
         This_Face_Index = []
         # 直接判断上下左右前后面的情况
         if (x, y, z) in can_see_points and (x, y + 1, z) in can_see_points and (x + 1, y + 1, z) in can_see_points and (
                 x + 1, y, z) in can_see_points:
+=======
+        # 直接判断上下左右前后面的情况
+        if (x, y, z) in can_see_points and (x, y + 1, z) in can_see_points and (x + 1, y + 1, z) in can_see_points and (
+        x + 1, y, z) in can_see_points:
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
             # 后面
             can_see_face.append(
                 (can_see_points.index((x, y, z)) + 1 + V_countLine,
@@ -200,7 +255,10 @@ vn 0 -1 0'''
                  can_see_points.index((x + 1, y, z)) + 1 + V_countLine,
                  )
             )
+<<<<<<< HEAD
             faceList.append([(x, y, z), '-z'])
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         if (x, y, z + 1) in can_see_points and (x, y + 1, z + 1) in can_see_points and (
                 x + 1, y + 1, z + 1) in can_see_points and (x + 1, y, z + 1) in can_see_points:
             # 前面
@@ -211,7 +269,10 @@ vn 0 -1 0'''
                  can_see_points.index((x + 1, y, z + 1)) + 1 + V_countLine,
                  )
             )
+<<<<<<< HEAD
             faceList.append([(x, y, z), 'z'])
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         if (x, y + 1, z) in can_see_points and (x, y + 1, z + 1) in can_see_points and (
                 x + 1, y + 1, z + 1) in can_see_points and (x + 1, y + 1, z) in can_see_points:
             # 上面
@@ -222,7 +283,10 @@ vn 0 -1 0'''
                  can_see_points.index((x + 1, y + 1, z)) + 1 + V_countLine,
                  )
             )
+<<<<<<< HEAD
             faceList.append([(x, y, z), 'y'])
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         if (x, y, z) in can_see_points and (x, y, z + 1) in can_see_points and (
                 x + 1, y, z + 1) in can_see_points and (x + 1, y, z) in can_see_points:
             # 下面
@@ -233,7 +297,10 @@ vn 0 -1 0'''
                  can_see_points.index((x + 1, y, z)) + 1 + V_countLine,
                  )
             )
+<<<<<<< HEAD
             faceList.append([(x, y, z), '-y'])
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         if (x, y, z) in can_see_points and (x, y, z + 1) in can_see_points and (
                 x, y + 1, z + 1) in can_see_points and (x, y + 1, z) in can_see_points:
             # 左面
@@ -244,7 +311,10 @@ vn 0 -1 0'''
                  can_see_points.index((x, y + 1, z)) + 1 + V_countLine,
                  )
             )
+<<<<<<< HEAD
             faceList.append([(x, y, z), '-x'])
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         if (x + 1, y, z) in can_see_points and (x + 1, y, z + 1) in can_see_points and (
                 x + 1, y + 1, z + 1) in can_see_points and (x + 1, y + 1, z) in can_see_points:
             # 右面
@@ -255,12 +325,16 @@ vn 0 -1 0'''
                  can_see_points.index((x + 1, y + 1, z)) + 1 + V_countLine,
                  )
             )
+<<<<<<< HEAD
             faceList.append([(x, y, z), 'x'])
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
         # log(can_see_face)
         for face in can_see_face:
             OBJ_F += f'f {face[0]} {face[1]} {face[2]} {face[3]}\n'
         V_countLine += addLines  # 确定上一次的count数，为面的index作开头行
     # log(len(OBJ_F.split('\n'))-1)
+<<<<<<< HEAD
     # 生成一个mtl文件
     MTL_filePath = './obj/'+outName+'.mtl'
     MTL_file = f'''#Pure material with MakeObj.py default render mode
@@ -272,11 +346,14 @@ Ks 0 0 0
 interpolateMode NEAREST_MAGNIFICATION_TRILINEAR_MIPMAP_MINIFICATION
 map_Kd default-RGBA.png
 '''
+=======
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
     Obj_ThisFile = Obj_ThisFile + OBJ_V + OBJ_F
     if os.path.exists('./obj') == False:
         os.mkdir('./obj')
     with open(ObjFilePath, 'w', encoding='utf-8') as OBJ:
         OBJ.write(Obj_ThisFile)
+<<<<<<< HEAD
     with open(MTL_filePath, 'w', encoding='utf-8') as MTL:
         MTL.write(MTL_file)
     mycopyfile('./img/blocks_Texture/default-RGBA.png',
@@ -289,6 +366,13 @@ map_Kd default-RGBA.png
     return ObjFilePath
 
 
+=======
+    log('create Obj file in : ' + ObjFilePath)
+    if is_open_now == True:
+        os.system('start '+ObjFilePath)
+    return ObjFilePath
+
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
 helpStr = '''
 <argv [1]>
 -help       output the help
@@ -307,6 +391,7 @@ if len(sys.argv) > 1:
     elif sys.argv[1] == '-version':
         log('[Pure NBT to OBJ] v0.0.1')
     else:
+<<<<<<< HEAD
         MakeStlFileByNbt(sys.argv[1], ThisName, is_open_now)
     # ./test/nbt/base_plate5
     log(f'use time:{process_time()}s')
@@ -323,3 +408,10 @@ def mycopyfile(srcfile, dstpath):                       # 复制函数
             os.makedirs(dstpath)                       # 创建路径
         shutil.copy(srcfile, dstpath + fname)          # 复制文件
         print("copy %s -> %s" % (srcfile, dstpath + fname))
+=======
+        MakeStlFileByNbt(sys.argv[1],ThisName,is_open_now)
+    # ./test/nbt/base_plate5
+    log(f'use time:{process_time()}s')
+else:
+    log('no file input')
+>>>>>>> 037f18edb9621da7e1dc8afbb4567a646a056396
